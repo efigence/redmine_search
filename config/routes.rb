@@ -1,2 +1,2 @@
-# Plugin's routes
-# See: http://guides.rubyonrails.org/routing.html
+get "searching/index", path: 'searching'
+get "searching/esearch", as: 'esearch'

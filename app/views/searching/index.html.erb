@@ -1,0 +1,23 @@
+<% content_for :header_tags do %>
+  <%= javascript_include_tag 'redminesearch', :plugin => 'redmine_search' %>
+<% end %>
+
+<h3><%= l(:label_search)%></h3>
+
+<div class="box">
+  <%= form_tag('/searching/esearch', :method => :get, :id => 'esearch-form', remote: true) do %>
+    <p>
+      <%= text_field_tag 'esearch', '', size: 60 %>
+      <%= submit_tag l(:label_search) %><br/>
+    </p>
+  <% end %>
+
+  <div class='filters'>
+    <%= link_to "Projects", {controller: 'searching', action: 'esearch', klass: "Project"}, :id => "project-filter", method: :get, remote: true %>
+  </div>
+</div>
+
+<table class="list issues">
+  <tbody class="tbody_entries">
+  </tbody>
+</table>

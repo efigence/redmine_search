@@ -1,0 +1,9 @@
+<tr id="project-<%= project.id %>">
+  <td class="id"><%= project.id %></td>
+  <td class="subject"><%= link_to project.name, project_path(project.id) %></td>
+</tr>
+<% unless project.description.blank? %>
+  <tr>
+    <td class="project" colspan="2"><%= project.description.truncate(60) %></td>
+  </tr>
+<% end %>
