@@ -1,1 +1,24 @@
+<% if params[:page].blank? || params[:page].to_i == 1 %>
+  <tr id="advanced-options">
+    <td colspan="5">
+      <%= render partial: 'searching/filters/' + @results[:klass].downcase + '_filter', locals: {query: @results[:esearch], klass: @results[:klass]} %>
+    </td>
+  </tr>
+
+  <tr id="total-wrapper">
+    <td colspan="5">
+      <div id="total_scores">Total(<%= @results[:total] %>)</div>
+    </td>
+  </tr>
+<% end %>
+
 <%= render partial: @results[:klass].downcase, collection: @results[:entries] %>
+
+<% if @results[:total_pages] >= @results[:next_page]  %>
+  <tr id="load-more-wrapper">
+    <td colspan="5">
+      <%= link_to l(:load_more), {controller: 'searching', action: 'esearch', klass: @results[:klass], esearch: @results[:esearch], page: @results[:next_page]}, :id => "load-more", method: :get, remote: true %>
+      (<%= @results[:load_more_count] %>)
+    </td>
+  </tr>
+<% end %>

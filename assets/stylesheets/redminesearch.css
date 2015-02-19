@@ -1,0 +1,14 @@
+#search-content {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+#esearch {
+  border-radius: 15px;
+  height: 20px;
+}
+#advanced-options {
+  background: #E5E2E2;
+  border-bottom: solid silver 2px;
+  margin-bottom: 5px;
+}

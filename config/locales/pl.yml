@@ -1,2 +1,8 @@
 pl:
   label_search: Wyszukaj
+  filter_issues: Zagadnienia
+  filter_projects: Projekty
+  load_more: Załaduj więcej
+  label_from: Od
+  label_to: Do
+  apply: Zastosuj

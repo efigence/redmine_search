@@ -1,2 +1,8 @@
 en:
   label_search: Search
+  filter_issues: Issues
+  filter_projects: Projects
+  load_more: Load more
+  label_from: From
+  label_to: To
+  apply: Apply
