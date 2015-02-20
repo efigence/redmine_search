@@ -1,5 +1,8 @@
 var bindLoadMore = function(){
   $("#select2project").select2();
+  $("#select2period").select2();
+  $("#select2users").select2();
+  $("#select2tracker").select2();
   $('#load-more').off("ajax:success").on("ajax:success", function(e, data, status, xhr){
     var entries = $('.tbody_entries');
 
@@ -20,7 +23,6 @@ var bindFilterForm = function(){
     $('#tbody_entries').html('Nie udało się.');
   });
 }
-
 
 $(function(){
   bindFilterForm();

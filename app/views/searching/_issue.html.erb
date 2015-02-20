@@ -4,9 +4,14 @@
   <td class="tracker"><%= issue.tracker %></td>
   <td class="priority"><%= issue.priority %></td>
   <td class="project"><%= link_to issue.project, project_path(issue.project_id) %></td>
+  <% if issue.assigned_to_id %>
+    <td class="assigned_to"><%= User.find(issue.assigned_to_id).name %></td>
+  <% else %>
+    <td class="assigned_to"></td>
+  <% end %>
 </tr>
 <% unless issue.description.blank? %>
   <tr>
-    <td class="project" colspan="5"><%= issue.description.truncate(60) %></td>
+    <td class="project" colspan="6"><%= issue.description.truncate(60) %></td>
   </tr>
 <% end %>

@@ -1,8 +1,16 @@
 en:
-  label_search: Search
+  apply: Apply
+  load_more: Load more
   filter_issues: Issues
   filter_projects: Projects
-  load_more: Load more
-  label_from: From
   label_to: To
-  apply: Apply
+  label_from: From
+  label_search: Search
+  label_period: Created
+  label_last_hour: Last hour
+  label_last_24_hours: Last 24 hours
+  label_last_week: Last week
+  label_last_month: Last month
+  label_last_year: Last year
+  label_users: Users
+  label_trackers: Type

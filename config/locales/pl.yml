@@ -1,8 +1,16 @@
 pl:
-  label_search: Wyszukaj
+  apply: Zastosuj
+  load_more: Załaduj więcej
   filter_issues: Zagadnienia
   filter_projects: Projekty
-  load_more: Załaduj więcej
-  label_from: Od
   label_to: Do
-  apply: Zastosuj
+  label_from: Od
+  label_search: Wyszukaj
+  label_period: Utworzony
+  label_last_hour: Ostatnia godzina
+  label_last_24_hours: Ostatnie 24 godziny
+  label_last_week: Ostatni tydzień
+  label_last_month: Ostatni miesiąc
+  label_last_year: Ostatni rok
+  label_users: Użytkownicy
+  label_trackers: Typ

@@ -1,0 +1,4 @@
+<%= l(:field_project) %>
+<%= select_tag :project_id, options_from_collection_for_select(User.current.projects, "id", "name"), id: 'select2project', multiple: true%>
+<%= l(:label_period) %>
+<%= select_tag :period, options_for_select(periods), id: 'select2period', include_blank: true %>

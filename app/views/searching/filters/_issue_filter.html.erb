@@ -3,13 +3,16 @@
   <%= hidden_field_tag :esearch, query %>
   <%= hidden_field_tag :klass, klass %>
 
-  <%= l(:label_from) %>
-  <%= text_field_tag :from, '', :class => 'datepicker', :dateFormat => 'mm/dd/y' %><%= calendar_for('from') %>
+  <!-- <#%= l(:label_from) %> -->
+  <!-- <#%= text_field_tag :from, '', :class => 'datepicker', :dateFormat => 'mm/dd/y' %><%= calendar_for('from') %> -->
+  <!-- <#%= l(:label_to) %> -->
+  <!-- <#%= text_field_tag :to, '', :class => 'datepicker', :dateFormat => 'mm/dd/y' %><%= calendar_for('to') %> -->
+  <%= render partial: 'searching/filters/base_filters' %>
 
-  <%= l(:label_to) %>
-  <%= text_field_tag :to, '', :class => 'datepicker', :dateFormat => 'mm/dd/y' %><%= calendar_for('to') %>
-  <%= l(:field_project) %>
-  <%= select_tag :project_id, options_from_collection_for_select(User.current.projects, "id", "name"), id: 'select2project', multiple: true%>
+  <%= l(:label_trackers) %>
+  <%= select_tag :tracker_id, options_from_collection_for_select(Tracker.all, "id", "name"), id: 'select2tracker', multiple: true %>
+  <%= l(:label_users) %>
+  <%= select_tag :assigned_to_id, options_from_collection_for_select(User.all, "id", "name"), id: 'select2users', multiple: true %>
 
   <%= submit_tag l(:apply) %>
 <% end %>

@@ -12,3 +12,11 @@
   border-bottom: solid silver 2px;
   margin-bottom: 5px;
 }
+#load-more-wrapper {
+  background: #F3F3F3;
+  font-weight: bold;
+}
+#total-wrapper {
+  background: #F3F3F3;
+  font-weight: bold;
+}
