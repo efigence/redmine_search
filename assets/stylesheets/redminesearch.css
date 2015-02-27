@@ -12,6 +12,9 @@
   border-bottom: solid silver 2px;
   margin-bottom: 5px;
 }
+#advanced-options td {
+  text-align: left;
+}
 #load-more-wrapper {
   background: #F3F3F3;
   font-weight: bold;
@@ -19,4 +22,9 @@
 #total-wrapper {
   background: #F3F3F3;
   font-weight: bold;
+}
+#searching-btn {
+  border-style: none;
+  border-radius: 15px;
+  height: 26px;
 }

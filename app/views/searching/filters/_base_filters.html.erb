@@ -1,4 +1,2 @@
-<%= l(:field_project) %>
-<%= select_tag :project_id, options_from_collection_for_select(User.current.projects, "id", "name"), id: 'select2project', multiple: true%>
-<%= l(:label_period) %>
-<%= select_tag :period, options_for_select(periods), id: 'select2period', include_blank: true %>
+<%= select_tag :project_id, options_from_collection_for_select(User.current.projects, "id", "name", params[:project_id]), id: 'select2project', class: "js-select2", multiple: true %>
+<%= select_tag :period, options_for_select(periods, params[:period]), id: 'select2period', class: "js-select2", include_blank: true %>

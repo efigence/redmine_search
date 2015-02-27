@@ -6,10 +6,9 @@ class SearchingController < ApplicationController
   end
 
   def esearch
-    klass = params[:klass] || "Issue"
+    klass = params[:klass]
     klass = klass.constantize
     conditions = set_condition if params[:condition]
-    conditions = params[:load_with_condition] if params[:load_with_condition]
     @results = klass.elastic_search params[:esearch], where: conditions, operator: "or", page: params[:page], per_page: 10
     @results = {
       next_page: @results.current_page + 1,
@@ -18,8 +17,7 @@ class SearchingController < ApplicationController
       klass: klass.name,
       total: @results.total_entries,
       load_more_count: @results.total_entries - (@results.current_page * 10),
-      esearch: params[:esearch],
-      conditions: conditions
+      esearch: params[:esearch]
     }
     render layout: false
   end
@@ -30,10 +28,15 @@ class SearchingController < ApplicationController
     set_project_condition if params[:project_id]
     set_assigned_condition if params[:assigned_to_id]
     set_tracker_condition if params[:tracker_id]
+    set_priority_condition if params[:priority_id]
     @conditions
   end
 
   private
+
+  def set_priority_condition
+    @conditions[:priority_id] = params[:priority_id]
+  end
 
   def set_tracker_condition
     @conditions[:tracker_id] = params[:tracker_id]

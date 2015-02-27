@@ -18,7 +18,7 @@
 <% if @results[:total_pages] >= @results[:next_page]  %>
   <tr id="load-more-wrapper">
     <td colspan="6">
-      <%= link_to l(:load_more), {controller: 'searching', action: 'esearch', klass: @results[:klass], esearch: @results[:esearch], page: @results[:next_page], load_with_condition: @results[:conditions]}, :id => "load-more", method: :get, remote: true %>
+      <%= link_to l(:load_more), {controller: 'searching', action: 'esearch', klass: @results[:klass], esearch: @results[:esearch], page: @results[:next_page], params: params}, :id => "load-more", method: :get, remote: true %>
       (<%= @results[:load_more_count] %>)
     </td>
   </tr>

@@ -12,6 +12,6 @@
 </tr>
 <% unless issue.description.blank? %>
   <tr>
-    <td class="project" colspan="6"><%= issue.description.truncate(60) %></td>
+    <td class="description" colspan="6"><%= issue.description.truncate(200) %></td>
   </tr>
 <% end %>

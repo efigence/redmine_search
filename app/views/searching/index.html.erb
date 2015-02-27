@@ -4,7 +4,8 @@
   <%= form_tag('/searching/esearch', :method => :get, :id => 'esearch-form', remote: true) do %>
     <p id="search-content">
       <%= text_field_tag 'esearch', '', size: 60 %>
-      <%= submit_tag l(:label_search) %>
+      <%= hidden_field_tag 'klass', "Issue" %>
+      <%= submit_tag l(:label_search), klass: 'Issue', id:'searching-btn' %>
       <br/>
     </p>
   <% end %>
