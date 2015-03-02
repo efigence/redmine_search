@@ -7,6 +7,10 @@
   border-radius: 15px;
   height: 20px;
 }
+#esearch:focus {
+  box-shadow: 0 0 5px #DEDEDE;
+  outline: none;
+}
 #advanced-options {
   background: #E5E2E2;
   border-bottom: solid silver 2px;
@@ -28,3 +32,29 @@
   border-radius: 15px;
   height: 26px;
 }
+#searching-btn:focus {
+  outline: none;
+}
+#searching-btn:hover {
+  background: rgb(175, 172, 172);
+  /*outline: none;*/
+}
+.selectsFields {
+  background-color: white;
+  border-radius: 4px;
+  border: 1px solid #aaa;
+  cursor: pointer;
+  height: 32px;
+}
+/*#dialog-date {
+  left: 50%;
+  background: #fff;
+  border: 1px solid #c5c5c5;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  height: 241px;
+  margin-left: -202px;
+  position: fixed;
+  top: 250px;
+  width: 373px;
+  z-index: 1001;
+}*/

@@ -15,3 +15,6 @@ pl:
   label_users: Użytkownicy
   label_trackers: Typ
   label_priority: Priorytet
+  label_data_range: Zakres dat
+  label_order_asc: Od najstarszych
+  label_order_desc: Od najnowszych

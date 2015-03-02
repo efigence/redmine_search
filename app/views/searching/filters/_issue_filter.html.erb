@@ -2,10 +2,7 @@
   <%= hidden_field_tag :condition, true %>
   <%= hidden_field_tag :esearch, query %>
   <%= hidden_field_tag :klass, klass %>
-  <!-- <#%= l(:label_from) %> -->
-  <!-- <#%= text_field_tag :from, '', :class => 'datepicker', :dateFormat => 'mm/dd/y' %><%= calendar_for('from') %> -->
-  <!-- <#%= l(:label_to) %> -->
-  <!-- <#%= text_field_tag :to, '', :class => 'datepicker', :dateFormat => 'mm/dd/y' %><%= calendar_for('to') %> -->
+
   <%= render partial: 'searching/filters/base_filters' %>
 
   <%= select_tag :tracker_id, options_from_collection_for_select(Tracker.all, "id", "name", params[:tracker_id]), id: 'select2tracker', class: "js-select2", multiple: true %>

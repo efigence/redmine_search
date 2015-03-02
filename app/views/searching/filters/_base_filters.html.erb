@@ -1,2 +1,10 @@
 <%= select_tag :project_id, options_from_collection_for_select(User.current.projects, "id", "name", params[:project_id]), id: 'select2project', class: "js-select2", multiple: true %>
-<%= select_tag :period, options_for_select(periods, params[:period]), id: 'select2period', class: "js-select2", include_blank: true %>
+<%= select_tag :period, options_for_select(periods, params[:period]), id: 'selectPeriod', class: 'selectsFields', include_blank: true %>
+<%= select_tag :order, options_for_select(order_options, params[:order]), id: 'selectOrder', class: 'selectsFields' %>
+<%= hidden_field_tag :from, params[:from], id: 'fieldDateFrom'  %>
+<%= hidden_field_tag :to, params[:to], id: 'fieldDateTo' %>
+
+<div id="dialog-date">
+  <%= text_field_tag :from, '', placeholder: l(:label_from), id: 'date-from'  %>
+  <%= text_field_tag :to, '', placeholder: l(:label_to), id: 'date-to'  %>
+</div>

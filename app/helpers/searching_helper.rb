@@ -7,7 +7,14 @@ module SearchingHelper
       [l(:label_last_week), "w"],
       [l(:label_last_month), "m"],
       [l(:label_last_year),"y"],
-      ['zakres dat',"p"]
+      [l(:label_data_range),"dr"]
+    ]
+  end
+
+  def order_options
+    [
+      [l(:label_order_desc), "desc"],
+      [l(:label_order_asc), "asc"]
     ]
   end
 end

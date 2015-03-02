@@ -6,10 +6,10 @@ class SearchingController < ApplicationController
   end
 
   def esearch
-    klass = params[:klass]
-    klass = klass.constantize
+    klass = params[:klass].constantize
     conditions = set_condition if params[:condition]
-    @results = klass.elastic_search params[:esearch], where: conditions, operator: "or", page: params[:page], per_page: 10
+    order_by = params[:order].blank? ? 'desc' : params[:order]
+    @results = klass.elastic_search params[:esearch], where: conditions, operator: "or", order: {created_on: order_by.to_sym}, page: params[:page], per_page: 10
     @results = {
       next_page: @results.current_page + 1,
       total_pages: @results.total_pages,
@@ -62,6 +62,10 @@ class SearchingController < ApplicationController
       p = 1.month.ago..DateTime.now
     when "y"
       p = 1.year.ago..DateTime.now
+    when "dr"
+      from = params[:from].blank? ? DateTime.now : params[:from].to_datetime
+      to = params[:to].blank? ? DateTime.now : params[:to].to_datetime
+      p = from..to
     end
     @conditions[:created_on] = p
   end

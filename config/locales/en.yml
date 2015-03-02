@@ -15,3 +15,6 @@ en:
   label_users: Users
   label_trackers: Type
   label_priority: Priority
+  label_data_range: Data range
+  label_order_asc: Oldest
+  label_order_desc: Latest
