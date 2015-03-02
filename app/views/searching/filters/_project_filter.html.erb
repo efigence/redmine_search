@@ -5,4 +5,5 @@
 
   <%= render partial: 'searching/filters/base_filters' %>
 
+  <%= select_tag :status, options_for_select(project_option, params[:status]), id: 'projectStatus', class: "selectsFields" %>
 <% end %>

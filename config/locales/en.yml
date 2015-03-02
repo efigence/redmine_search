@@ -6,7 +6,7 @@ en:
   label_to: To
   label_from: From
   label_search: Search
-  label_period: Created
+  label_period: Whenever
   label_last_hour: Last hour
   label_last_24_hours: Last 24 hours
   label_last_week: Last week
@@ -18,3 +18,7 @@ en:
   label_data_range: Data range
   label_order_asc: Oldest
   label_order_desc: Latest
+  label_project_all: All
+  label_project_open: Opened
+  label_project_close: Closed
+  label_project_archive: Archived

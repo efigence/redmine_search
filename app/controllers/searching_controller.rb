@@ -24,16 +24,21 @@ class SearchingController < ApplicationController
 
   def set_condition
     @conditions = {}
-    set_data_condition if params[:period] != ""
+    set_date_condition if params[:period] != ""
     set_project_condition if params[:project_id]
     set_assigned_condition if params[:assigned_to_id]
     set_tracker_condition if params[:tracker_id]
     set_priority_condition if params[:priority_id]
     set_status_condition if params[:status_id]
+    set_project_status_condition if params[:status] != ""
     @conditions
   end
 
   private
+
+  def set_project_status_condition
+    @conditions[:status] = params[:status]
+  end
 
   def set_status_condition
     @conditions[:status_id] = params[:status_id]
@@ -55,7 +60,7 @@ class SearchingController < ApplicationController
     @conditions[:project_id] = params[:project_id]
   end
 
-  def set_data_condition
+  def set_date_condition
     case params[:period]
     when "h"
       p = 1.hour.ago..DateTime.now
@@ -70,7 +75,7 @@ class SearchingController < ApplicationController
     when "dr"
       from = params[:from].blank? ? DateTime.now : params[:from].to_datetime
       to = params[:to].blank? ? DateTime.now : params[:to].to_datetime
-      p = from..to
+      p = from > to ? to..from : from..to
     end
     @conditions[:created_on] = p
   end

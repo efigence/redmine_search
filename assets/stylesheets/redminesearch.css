@@ -53,15 +53,7 @@
 .select2-container {
   max-width: 300px !important;
 }
-/*#dialog-date {
-  left: 50%;
-  background: #fff;
-  border: 1px solid #c5c5c5;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-  height: 241px;
-  margin-left: -202px;
-  position: fixed;
-  top: 250px;
-  width: 373px;
-  z-index: 1001;
-}*/
+
+.js-select2 {
+  height: 32px;
+}

@@ -6,7 +6,7 @@ pl:
   label_to: Do
   label_from: Od
   label_search: Wyszukaj
-  label_period: Utworzony
+  label_period: Kiedykolwiek
   label_last_hour: Ostatnia godzina
   label_last_24_hours: Ostatnie 24 godziny
   label_last_week: Ostatni tydzień
@@ -18,3 +18,7 @@ pl:
   label_data_range: Zakres dat
   label_order_asc: Od najstarszych
   label_order_desc: Od najnowszych
+  label_project_all: Wszystkie
+  label_project_open: Otwarte
+  label_project_close: Zamknięte
+  label_project_archive: Archiwalne
