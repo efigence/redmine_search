@@ -3,6 +3,7 @@
   <td class="subject"><%= link_to issue.subject, issue_path(issue.id) %></td>
   <td class="tracker"><%= issue.tracker %></td>
   <td class="priority"><%= issue.priority %></td>
+  <td class="status"><%= issue.status %></td>
   <td class="project"><%= link_to issue.project, project_path(issue.project_id) %></td>
   <% if issue.assigned_to_id %>
     <td class="assigned_to"><%= User.find(issue.assigned_to_id).name %></td>
@@ -12,6 +13,6 @@
 </tr>
 <% unless issue.description.blank? %>
   <tr>
-    <td class="description" colspan="6"><%= issue.description.truncate(200) %></td>
+    <td class="description" colspan="7"><%= issue.description.truncate(200) %></td>
   </tr>
 <% end %>

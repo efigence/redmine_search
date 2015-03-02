@@ -29,10 +29,15 @@ class SearchingController < ApplicationController
     set_assigned_condition if params[:assigned_to_id]
     set_tracker_condition if params[:tracker_id]
     set_priority_condition if params[:priority_id]
+    set_status_condition if params[:status_id]
     @conditions
   end
 
   private
+
+  def set_status_condition
+    @conditions[:status_id] = params[:status_id]
+  end
 
   def set_priority_condition
     @conditions[:priority_id] = params[:priority_id]

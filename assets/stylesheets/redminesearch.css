@@ -46,6 +46,13 @@
   cursor: pointer;
   height: 32px;
 }
+
+.ui-dialog .ui-dialog-content {
+  top: 20px;
+}
+.select2-container {
+  max-width: 300px !important;
+}
 /*#dialog-date {
   left: 50%;
   background: #fff;

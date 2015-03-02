@@ -47,9 +47,10 @@ var bindModalDate = function() {
     height: 200,
     width: 204,
     modal: true,
+    draggable: false,
     resizable: false,
     buttons: {
-      "Ok": function() {
+      "OK": function() {
         var from = $("#date-from").val(),
             to = $("#date-to").val();
         $('#fieldDateFrom').val(from);
@@ -77,7 +78,7 @@ var bindTabs = function() {
 var bindConditions = function(){
   bindModalDate();
   $("#select2project").select2({
-    placeholder: "Select projects",
+    placeholder: "Project",
     allowClear: true
   });
 
@@ -88,15 +89,20 @@ var bindConditions = function(){
     }
   });
   $("#select2users").select2({
-    placeholder: "Select users",
-    allowClear: true
+    placeholder: "User",
+    allowClear: true,
+    containerCssClass: "UserSelectElement"
   });
   $("#select2tracker").select2({
-    placeholder: "Select trackers",
+    placeholder: "Tracker",
     allowClear: true
   });
   $("#select2priority").select2({
-    placeholder: "Selecet priorities",
+    placeholder: "Priority",
+    allowClear: true
+  });
+  $("#select2status").select2({
+    placeholder: "Status",
     allowClear: true
   });
 }

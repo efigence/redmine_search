@@ -5,10 +5,12 @@
 
   <%= render partial: 'searching/filters/base_filters' %>
 
-  <%= select_tag :tracker_id, options_from_collection_for_select(Tracker.all, "id", "name", params[:tracker_id]), id: 'select2tracker', class: "js-select2", multiple: true %>
+  <%= select_tag :tracker_id, options_from_collection_for_select(Tracker.select('id, name'), "id", "name", params[:tracker_id]), id: 'select2tracker', class: "js-select2", multiple: true %>
 
   <%= select_tag :assigned_to_id, options_from_collection_for_select(User.all, "id", "name", params[:assigned_to_id]), id: 'select2users', class: "js-select2", multiple: true %>
 
-  <%= select_tag :priority_id, options_from_collection_for_select(IssuePriority.all, "id", "name", params[:priority_id]), id: 'select2priority', class: "js-select2", multiple: true %>
+  <%= select_tag :priority_id, options_from_collection_for_select(IssuePriority.select('id, name'), "id", "name", params[:priority_id]), id: 'select2priority', class: "js-select2", multiple: true %>
+
+  <%= select_tag :status_id, options_from_collection_for_select(IssueStatus.select('id, name'), "id", "name", params[:status_id]), id: 'select2status', class: "js-select2", multiple: true %>
 
 <% end %>
