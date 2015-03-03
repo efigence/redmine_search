@@ -5,6 +5,8 @@
 
   <%= render partial: 'searching/filters/base_filters' %>
 
+  <%= select_tag :project_id, options_from_collection_for_select(User.current.projects, "id", "name", params[:project_id]), id: 'select2project', class: "js-select2", multiple: true %>
+
   <%= select_tag :tracker_id, options_from_collection_for_select(Tracker.select('id, name'), "id", "name", params[:tracker_id]), id: 'select2tracker', class: "js-select2", multiple: true %>
 
   <%= select_tag :assigned_to_id, options_from_collection_for_select(User.all, "id", "name", params[:assigned_to_id]), id: 'select2users', class: "js-select2", multiple: true %>

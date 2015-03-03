@@ -1,0 +1,39 @@
+projects_001: 
+  created_on: <%= 3.days.ago.to_s(:db) %>
+  name: projects_001
+  updated_on: 2014-07-19 22:12:01 +02:00
+  id: 1
+  description: Testing for testing
+  homepage: http://projects_001.somenet.foo/
+  is_public: true
+  identifier: projects_001
+  parent_id: 
+  status: 1
+  lft: 1
+  rgt: 10
+projects_002: 
+  created_on: <%= 14.days.ago.to_s(:db) %>
+  name: Test project
+  updated_on: 2014-07-20 00:22:01 +02:00
+  id: 2
+  description: AWESOME PROJECT 2
+  homepage: http://projects_002.somenet.foo/
+  is_public: true
+  identifier: projects_002
+  parent_id:
+  status: 5
+  lft: 1
+  rgt: 10
+projects_003: 
+  created_on: <%= 1.year.ago.to_s(:db) %>
+  name: Testing features
+  updated_on: 2014-07-20 00:33:01 +02:00
+  id: 3
+  description: AWESOME PROJECT 3
+  homepage: http://projects_003.somenet.foo/
+  is_public: true
+  status: 5
+  identifier: projects_003
+  parent_id: 
+  lft: 1
+  rgt: 10

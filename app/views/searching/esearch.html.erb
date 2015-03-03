@@ -2,7 +2,7 @@
 
   <tr id="advanced-options">
     <td colspan="7">
-      <%= render partial: 'searching/filters/' + @results[:klass].downcase + '_filter', locals: {query: @results[:esearch], klass: @results[:klass]} %>
+      <%= render partial: "searching/filters/#{@results[:klass].downcase}_filter", locals: {query: @results[:esearch], klass: @results[:klass]} %>
     </td>
   </tr>
 
@@ -13,7 +13,7 @@
   </tr>
 <% end %>
 
-<%= render partial: 'searching/templates/' + @results[:klass].downcase, collection: @results[:entries] %>
+<%= render partial: "searching/templates/#{@results[:klass].downcase}", collection: @results[:entries] %>
 
 <% if @results[:total_pages] >= @results[:next_page]  %>
   <tr id="load-more-wrapper">

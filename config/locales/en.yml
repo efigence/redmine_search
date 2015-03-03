@@ -17,7 +17,7 @@ en:
   label_priority: Priority
   label_data_range: Data range
   label_order_asc: Oldest
-  label_order_desc: Latest
+  label_order_desc: Newest
   label_project_all: All
   label_project_open: Opened
   label_project_close: Closed

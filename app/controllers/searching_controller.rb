@@ -1,7 +1,6 @@
 class SearchingController < ApplicationController
   unloadable
 
-
   def index
   end
 
@@ -24,13 +23,13 @@ class SearchingController < ApplicationController
 
   def set_condition
     @conditions = {}
-    set_date_condition if params[:period] != ""
-    set_project_condition if params[:project_id]
-    set_assigned_condition if params[:assigned_to_id]
-    set_tracker_condition if params[:tracker_id]
-    set_priority_condition if params[:priority_id]
-    set_status_condition if params[:status_id]
-    set_project_status_condition if params[:status] != ""
+    set_date_condition           unless params[:period].blank?
+    set_project_condition        unless params[:project_id].blank?
+    set_assigned_condition       unless params[:assigned_to_id].blank?
+    set_tracker_condition        unless params[:tracker_id].blank?
+    set_priority_condition       unless params[:priority_id].blank?
+    set_status_condition         unless params[:status_id].blank?
+    set_project_status_condition unless params[:status].blank?
     @conditions
   end
 

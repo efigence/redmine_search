@@ -9,7 +9,7 @@ Redmine::Plugin.register :redmine_search do
 
   menu :top_menu,
     :searching, { controller: 'searching', action: 'index'},
-    caption: :label_search
+    caption: :label_search, :after => :help
 end
 
 ActiveSupport.on_load :after_initialize, yield: true do
