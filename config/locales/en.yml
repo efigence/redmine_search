@@ -22,3 +22,4 @@ en:
   label_project_open: Opened
   label_project_close: Closed
   label_project_archive: Archived
+  label_cleanup: Clear

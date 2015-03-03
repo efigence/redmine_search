@@ -14,7 +14,6 @@
 <% end %>
 
 <%= render partial: "searching/templates/#{@results[:klass].downcase}", collection: @results[:entries] %>
-
 <% if @results[:total_pages] >= @results[:next_page]  %>
   <tr id="load-more-wrapper">
     <td colspan="7">

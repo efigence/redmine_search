@@ -3,13 +3,13 @@
 <div class="box">
   <%= form_tag('/searching/esearch', :method => :get, :id => 'esearch-form', remote: true) do %>
     <p id="search-content">
-      <%= text_field_tag 'esearch', '', size: 60 %>
+      <%= text_field_tag 'esearch', params[:esearch], size: 60 %>
       <%= hidden_field_tag 'klass', "Issue" %>
       <%= submit_tag l(:label_search), id:'searching-btn' %>
+      <%= link_to l(:label_cleanup), searching_cleanup_path %>
       <br/>
     </p>
   <% end %>
-
   <div class='filters'>
     <%= link_to l(:filter_issues), {controller: 'searching', action: 'esearch', klass: "Issue"}, :id => "issue-filter", method: :get, remote: true %> |
     <%= link_to l(:filter_projects), {controller: 'searching', action: 'esearch', klass: "Project"}, :id => "project-filter", method: :get, remote: true %>
@@ -18,6 +18,9 @@
 
 <table class="list issues">
   <tbody class="tbody_entries">
+    <% if @results %>
+      <%= render partial: 'esearch' %>
+    <% end %>
     <!-- render -->
   </tbody>
 </table>

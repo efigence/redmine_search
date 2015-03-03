@@ -6,4 +6,6 @@
   <%= render partial: 'searching/filters/base_filters' %>
 
   <%= select_tag :status, options_for_select(project_option, params[:status]), id: 'projectStatus', class: "selectsFields" %>
+
+  <%= select_tag :role_id, options_from_collection_for_select(Role.all, "id", "name", params[:role_id]), id: 'select2roles', class: "js-select2", multiple: true %>
 <% end %>

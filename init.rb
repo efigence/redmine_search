@@ -1,4 +1,6 @@
 # encoding: utf-8
+require 'redmine_search'
+
 Redmine::Plugin.register :redmine_search do
   name 'Redmine Search plugin'
   author 'Marcin Świątkiewicz'

@@ -105,12 +105,17 @@ var bindConditions = function(){
     placeholder: "Status",
     allowClear: true
   });
+  $("#select2roles").select2({
+    placeholder: "My roles",
+    allowClear: true
+  });
 }
 
 $(function(){
+  bindLoadMore();
   bindTabs();
   bindFilterForm();
-  $('.filters').hide();
+  // $('.filters').hide();
   $('#esearch-form').on("ajax:success", function(e, data, status, xhr){
     $('.filters').show();
     var filter = $('.filters').children();
