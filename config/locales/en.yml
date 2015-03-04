@@ -23,3 +23,8 @@ en:
   label_project_close: Closed
   label_project_archive: Archived
   label_cleanup: Clear
+  label_all: All
+  label_public: Public
+  label_private: Private
+  allowed_groups_to_see_private_issues: Allowed groups to see private issues
+  allowed_users_to_see_private_issues: Allowed users to see private issues

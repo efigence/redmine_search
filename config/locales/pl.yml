@@ -23,3 +23,8 @@ pl:
   label_project_close: Zamknięte
   label_project_archive: Archiwalne
   label_cleanup: Wyczyść
+  label_all: Wszystkie
+  label_public: Publiczne
+  label_private: Prywatne
+  allowed_groups_to_see_private_issues: "Grupy, które mogą widzieć prywatne zagadnienia"
+  allowed_users_to_see_private_issues: "Użytkownicy, którzy mogą widzieć prywatne zagadnienia"

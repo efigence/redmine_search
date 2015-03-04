@@ -12,6 +12,10 @@ Redmine::Plugin.register :redmine_search do
   menu :top_menu,
     :searching, { controller: 'searching', action: 'index'},
     caption: :label_search, :after => :help
+
+  settings :default => {
+
+    }, partial: 'settings/redmine_search_settings'
 end
 
 ActiveSupport.on_load :after_initialize, yield: true do

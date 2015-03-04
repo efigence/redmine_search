@@ -2,11 +2,11 @@ require_relative './date_condition'
 module RedmineSearch
   class ProjectsEsearch < DateCondition
 
-    def search params
+    def search params, allowed_to
       @params = params
       set_condition
       order_by = @params[:order].blank? ? 'desc' : @params[:order]
-      @results = Project.elastic_search @params[:esearch], where: @conditions, operator: "or", order: {created_on: order_by.to_sym}, page: @params[:page], per_page: 10
+      @results = Project.elastic_search @params[:esearch], fields: ["name^1.5", "description"], where: @conditions, operator: "or", order: {created_on: order_by.to_sym}, page: @params[:page], per_page: 10
     end
 
     private

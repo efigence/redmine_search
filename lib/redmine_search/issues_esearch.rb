@@ -3,11 +3,12 @@ require_relative './date_condition'
 module RedmineSearch
   class IssuesEsearch < DateCondition
 
-    def search params
+    def search params, allowed_to
+      @allowed_to = allowed_to
       @params = params
       set_condition
       order_by = @params[:order].blank? ? 'desc' : @params[:order]
-      @results = Issue.elastic_search @params[:esearch], fields: ["subject^10", "description"], where: @conditions, operator: "or", order: {created_on: order_by.to_sym}, page: @params[:page], per_page: 10
+      @results = Issue.elastic_search @params[:esearch], fields: ["subject^1.5", "description"], where: @conditions, operator: "or", order: {created_on: order_by.to_sym}, page: @params[:page], per_page: 10
     end
 
     private
@@ -21,6 +22,13 @@ module RedmineSearch
       set_tracker_condition        unless @params[:tracker_id].blank?
       set_priority_condition       unless @params[:priority_id].blank?
       set_status_condition         unless @params[:status_id].blank?
+      set_is_private_condition     unless (@params[:is_private].blank? || @params[:is_private] == 'all') && @allowed_to
+    end
+
+    def set_is_private_condition
+      return @conditions[:is_private] = false if !@allowed_to
+      p = @params[:is_private] == "false" ? false : true
+      @conditions[:is_private] = p
     end
 
     def set_issues_condition

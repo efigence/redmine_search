@@ -28,6 +28,14 @@ module SearchingHelper
     ]
   end
 
+  def issue_privacy_option
+    [
+      [l(:label_all), 'all'],
+      [l(:label_public), false],
+      [l(:label_private), true]
+    ]
+  end
+
   def date_range
     params[:period] == "dr" ? "#{params[:from]} - #{params[:to]}" : l(:label_data_range)
   end

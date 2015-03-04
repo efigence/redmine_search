@@ -3,7 +3,7 @@ require 'redmine_search/projects_esearch'
 module RedmineSearch
 
   def get_search_class
-    @results = set_class_name.new.search params
+    @results = set_class_name.new.search params, session[:allowed_to_private]
   end
 
   private

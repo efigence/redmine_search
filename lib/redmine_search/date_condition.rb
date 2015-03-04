@@ -19,6 +19,6 @@ module RedmineSearch
         p = from > to ? to..from : from..to
       end
       @conditions[:created_on] = p
-end
+    end
   end
 end

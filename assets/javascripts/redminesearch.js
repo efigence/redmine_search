@@ -81,12 +81,14 @@ var setCurrentPeriod = function(el) {
 }
 var bindTabs = function() {
   $('#project-filter').click(function(){
+    $('.ui-dialog').remove();
     $('#klass').val('Project');
     setSearchPeriod();
     setCurrentPeriod(this);
    });
 
   $('#issue-filter').click(function(){
+    $('.ui-dialog').remove();
     $('#klass').val('Issue');
     setSearchPeriod();
     setCurrentPeriod(this);

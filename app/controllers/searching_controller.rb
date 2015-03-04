@@ -5,6 +5,7 @@ class SearchingController < ApplicationController
   include RedmineSearch
 
   def index
+    session[:allowed_to_private] = allowed_to_private?
     # if !session[:esearch].blank?
     #   params.merge!(session[:esearch])
     #   esearch
@@ -29,5 +30,12 @@ class SearchingController < ApplicationController
   def cleanup
     session[:esearch] = nil
     redirect_to :action => "index"
+  end
+
+  def allowed_to_private?
+    return true if User.current.admin?
+    cond_g = !!Setting.plugin_redmine_search['groups'] && User.current.groups.where(id: Setting.plugin_redmine_search['groups']).any?
+    cond_u = [Setting.plugin_redmine_search['users']].flatten.include?(User.current.id.to_s)
+    cond_u || cond_g
   end
 end
