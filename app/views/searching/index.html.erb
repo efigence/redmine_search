@@ -5,7 +5,10 @@
     <p id="search-content">
       <%= text_field_tag 'esearch', params[:esearch], size: 60 %>
       <%= hidden_field_tag 'klass', "Issue" %>
-      <%= submit_tag l(:label_search), id:'searching-btn' %>
+      <%= hidden_field_tag 'period', '' %>
+      <%= hidden_field_tag 'from', '' %>
+      <%= hidden_field_tag 'to', '' %>
+      <%= submit_tag l(:label_search), id: 'searching-btn' %>
       <%= link_to l(:label_cleanup), searching_cleanup_path %>
       <br/>
     </p>

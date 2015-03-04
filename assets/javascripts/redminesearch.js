@@ -13,7 +13,6 @@ var bindLoadMore = function(){
 
 var bindFilterForm = function(){
   $('#filter-form').change(function(){
-    tmpDate = $('#selectPeriod').find(":selected").text();
     if (event.target.value !== "dr") {
       setTimeout(function(){
         var el = $('.js-select2');
@@ -21,9 +20,6 @@ var bindFilterForm = function(){
           $(el[i]).select2("close");
         };
         $('#filter-form').submit();
-        setTimeout(function(){
-          $('#selectPeriod').find(":selected").text(tmpDate);
-        }, 100);
       }, 100);
     }
   });
@@ -33,6 +29,7 @@ var bindFilterForm = function(){
     bindLoadMore();
     bindFilterForm();
     bindModalDate();
+    setSearchPeriod();
   }).on("ajax:error", function(e, xhr, status, error){
     $('#tbody_entries').html('Nie udało się.');
   });
@@ -61,14 +58,38 @@ var bindModalDate = function() {
     }
   });
 }
+var setSearchPeriod = function() {
+  // set main search input filters
+  var period = $('#selectPeriod').val(),
+      from = $('#fieldDateFrom').val(),
+      to = $("#fieldDateTo").val();
+  $('#period').val(period);
+  if (period === "dr") {
+    $('#from').val(from);
+    $('#to').val(to);
+  }
+}
 
+var setCurrentPeriod = function(el) {
+  // set href to tabs with period
+  var period = $('#selectPeriod').val()
+  el.href = el.href + '&period=' + period;
+  if (period === "dr") {
+    el.href = el.href + '&from=' + $('#fieldDateFrom').val();
+    el.href = el.href + '&to=' + $('#fieldDateTo').val();
+  }
+}
 var bindTabs = function() {
   $('#project-filter').click(function(){
     $('#klass').val('Project');
-  });
+    setSearchPeriod();
+    setCurrentPeriod(this);
+   });
 
   $('#issue-filter').click(function(){
     $('#klass').val('Issue');
+    setSearchPeriod();
+    setCurrentPeriod(this);
   });
 }
 
