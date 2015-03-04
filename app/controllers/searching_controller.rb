@@ -5,10 +5,10 @@ class SearchingController < ApplicationController
   include RedmineSearch
 
   def index
-    if !session[:esearch].blank?
-      params.merge!(session[:esearch])
-      esearch
-    end
+    # if !session[:esearch].blank?
+    #   params.merge!(session[:esearch])
+    #   esearch
+    # end
   end
 
   def esearch
@@ -22,7 +22,7 @@ class SearchingController < ApplicationController
       load_more_count: @results.total_entries - (@results.current_page * 10),
       esearch: params[:esearch]
     }
-    session[:esearch] = params
+    # session[:esearch] = params
     render partial: 'esearch' if request.xhr?
   end
 

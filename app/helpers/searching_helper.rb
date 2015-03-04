@@ -8,7 +8,7 @@ module SearchingHelper
       [l(:label_last_week), "w"],
       [l(:label_last_month), "m"],
       [l(:label_last_year),"y"],
-      [l(:label_data_range),"dr"]
+      [date_range,"dr"]
     ]
   end
 
@@ -26,5 +26,9 @@ module SearchingHelper
       [l(:label_project_close), Project::STATUS_CLOSED],
       [l(:label_project_archive), Project::STATUS_ARCHIVED]
     ]
+  end
+
+  def date_range
+    params[:period] == "dr" ? "#{params[:from]} - #{params[:to]}" : l(:label_data_range)
   end
 end

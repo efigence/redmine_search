@@ -57,9 +57,6 @@ var bindModalDate = function() {
         $("#fieldDateTo").val(to);
         form.submit();
         dialog.dialog( "close" );
-        setTimeout(function(){
-          $('#selectPeriod').find(":selected").text(from + " - " + to);
-        }, 100);
       }
     }
   });
@@ -112,10 +109,10 @@ var bindConditions = function(){
 }
 
 $(function(){
+  $('.filters').hide();
   bindLoadMore();
   bindTabs();
   bindFilterForm();
-  // $('.filters').hide();
   $('#esearch-form').on("ajax:success", function(e, data, status, xhr){
     $('.filters').show();
     var filter = $('.filters').children();

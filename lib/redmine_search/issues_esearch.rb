@@ -7,7 +7,7 @@ module RedmineSearch
       @params = params
       set_condition
       order_by = @params[:order].blank? ? 'desc' : @params[:order]
-      @results = Issue.elastic_search @params[:esearch], where: @conditions, operator: "or", order: {created_on: order_by.to_sym}, page: @params[:page], per_page: 10
+      @results = Issue.elastic_search @params[:esearch], fields: ["subject^10", "description"], where: @conditions, operator: "or", order: {created_on: order_by.to_sym}, page: @params[:page], per_page: 10
     end
 
     private

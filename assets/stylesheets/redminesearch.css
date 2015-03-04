@@ -57,3 +57,28 @@
 .js-select2 {
   height: 32px;
 }
+
+.filter-btn {
+  background-color: #ededed;
+  border-radius: 6px;
+  border: 1px solid #dcdcdc;
+  display: inline-block;
+  color: #565659 !important;
+  font-family: arial;
+  font-size: 11px;
+  font-weight: bold;
+  font-style: normal;
+  height: 25px;
+  line-height: 25px;
+  width: 65px;
+  text-decoration:none !important;
+  text-align: center;
+  text-shadow: 1px 1px 0px #ffffff;
+}
+
+.filter-btn:hover {
+  background-color: #dfdfdf;
+
+}.filter-btn:active {
+  position: relative;
+  top: 1px;

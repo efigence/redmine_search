@@ -1,0 +1,3 @@
+<%= link_to l(:filter_issues), {controller: 'searching', action: 'esearch', klass: "Issue"}, :id => "issue-filter", method: :get, remote: true, class: 'filter-btn' %>
+
+<%= link_to l(:filter_projects), {controller: 'searching', action: 'esearch', klass: "Project"}, :id => "project-filter", method: :get, remote: true, class: 'filter-btn' %>
