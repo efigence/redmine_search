@@ -38,3 +38,4 @@ pl:
   label_private: Prywatne
   allowed_groups_to_see_private_issues: "Grupy, które mogą widzieć prywatne zagadnienia"
   allowed_users_to_see_private_issues: "Użytkownicy, którzy mogą widzieć prywatne zagadnienia"
+  searching_language: Wybierz język wyszukiwania
