@@ -1,8 +1,18 @@
 en:
   apply: Apply
-  load_more: Load more
+  load_more: 'Load more (%{to_load})'
   filter_issues: Issues
   filter_projects: Projects
+  filter_wiki: Wiki pages
+  filter_docs: Documents
+  filter_by:
+    project: Project
+    tracker: Tracker
+    user: User
+    priority: Priority
+    status: Status
+    role: My role
+  label_total: 'Total (%{total})'
   label_to: To
   label_from: From
   label_search: Search

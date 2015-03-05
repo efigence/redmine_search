@@ -1,8 +1,18 @@
 pl:
   apply: Zastosuj
-  load_more: Załaduj więcej
+  load_more: 'Załaduj więcej (%{to_load})'
   filter_issues: Zagadnienia
   filter_projects: Projekty
+  filter_wiki: Strony wiki
+  filter_docs: Dokumenty
+  filter_by:
+    project: Projekt
+    tracker: Typ
+    user: Użytkownik
+    priority: Priorytet
+    status: Status
+    role: Moja rola
+  label_total: 'Łącznie (%{total})'
   label_to: Do
   label_from: Od
   label_search: Wyszukaj

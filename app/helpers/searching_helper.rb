@@ -36,6 +36,10 @@ module SearchingHelper
     ]
   end
 
+  def available_projects
+    User.current.admin? ? Project.all : User.current.projects
+  end
+
   def date_range
     params[:period] == "dr" ? "#{params[:from]} - #{params[:to]}" : l(:label_data_range)
   end

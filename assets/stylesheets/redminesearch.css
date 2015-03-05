@@ -28,6 +28,7 @@
   font-weight: bold;
 }
 #searching-btn {
+  padding: 3px 10px;
   border-style: none;
   border-radius: 15px;
   height: 26px;
@@ -70,10 +71,16 @@
   font-style: normal;
   height: 25px;
   line-height: 25px;
-  width: 65px;
+  /*width: 75px;*/
+  padding: 3px 10px;
   text-decoration:none !important;
   text-align: center;
   text-shadow: 1px 1px 0px #ffffff;
+}
+
+.filter-btn.active {
+  background-color: #D4D4D4;
+  border: 1px solid #B6B6B6;
 }
 
 .filter-btn:hover {

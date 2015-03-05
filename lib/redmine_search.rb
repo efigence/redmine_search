@@ -1,5 +1,7 @@
 require 'redmine_search/issues_esearch'
 require 'redmine_search/projects_esearch'
+require 'redmine_search/wiki_page_esearch'
+
 module RedmineSearch
 
   def get_search_class
@@ -14,6 +16,8 @@ module RedmineSearch
       IssuesEsearch
     when "Project"
       ProjectsEsearch
+    when "WikiPage"
+      WikiPageEsearch
     end
   end
 

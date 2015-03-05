@@ -5,15 +5,15 @@
 
   <%= render partial: 'searching/filters/base_filters' %>
 
-  <%= select_tag :project_id, options_from_collection_for_select(User.current.projects, "id", "name", params[:project_id]), id: 'select2project', class: "js-select2", multiple: true %>
+  <%= select_tag :project_id, options_from_collection_for_select(available_projects, "id", "name", params[:project_id]), id: 'select2project', class: "js-select2", multiple: true, 'data-placeholder'=> l('filter_by.project')  %>
 
-  <%= select_tag :tracker_id, options_from_collection_for_select(Tracker.select('id, name'), "id", "name", params[:tracker_id]), id: 'select2tracker', class: "js-select2", multiple: true %>
+  <%= select_tag :tracker_id, options_from_collection_for_select(Tracker.select('id, name'), "id", "name", params[:tracker_id]), id: 'select2tracker', class: "js-select2", multiple: true, 'data-placeholder'=> l('filter_by.tracker') %>
 
-  <%= select_tag :assigned_to_id, options_from_collection_for_select(User.all, "id", "name", params[:assigned_to_id]), id: 'select2users', class: "js-select2", multiple: true %>
+  <%= select_tag :assigned_to_id, options_from_collection_for_select(User.all, "id", "name", params[:assigned_to_id]), id: 'select2users', class: "js-select2", multiple: true, 'data-placeholder'=> l('filter_by.user') %>
 
-  <%= select_tag :priority_id, options_from_collection_for_select(IssuePriority.select('id, name'), "id", "name", params[:priority_id]), id: 'select2priority', class: "js-select2", multiple: true %>
+  <%= select_tag :priority_id, options_from_collection_for_select(IssuePriority.select('id, name'), "id", "name", params[:priority_id]), id: 'select2priority', class: "js-select2", multiple: true, 'data-placeholder'=> l('filter_by.priority') %>
 
-  <%= select_tag :status_id, options_from_collection_for_select(IssueStatus.select('id, name'), "id", "name", params[:status_id]), id: 'select2status', class: "js-select2", multiple: true %>
+  <%= select_tag :status_id, options_from_collection_for_select(IssueStatus.select('id, name'), "id", "name", params[:status_id]), id: 'select2status', class: "js-select2", multiple: true, 'data-placeholder'=> l('filter_by.status') %>
 
   <% if session[:allowed_to_private] %>
     <%= select_tag :is_private, options_for_select(issue_privacy_option, params[:is_private]), class: 'selectsFields' %>

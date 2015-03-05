@@ -1,0 +1,5 @@
+<tr id="wikipage-<%= wikipage.id %>">
+  <td class="id"><%= wikipage.id %></td>
+  <td class="subject"><%= link_to wikipage.title, project_wiki_index_path(wikipage.project.id) %></td>
+  <td class="text"><%= wikipage.text %></td>
+</tr>

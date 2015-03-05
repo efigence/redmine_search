@@ -21,4 +21,5 @@ end
 ActiveSupport.on_load :after_initialize, yield: true do
   require 'redmine_search/patches/issue_patch'
   require 'redmine_search/patches/project_patch'
+  require 'redmine_search/patches/wiki_page_patch'
 end

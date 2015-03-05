@@ -83,6 +83,7 @@ var bindTabs = function() {
   $('#project-filter').click(function(){
     $('.ui-dialog').remove();
     $('#klass').val('Project');
+    setClassActive(this);
     setSearchPeriod();
     setCurrentPeriod(this);
    });
@@ -90,16 +91,29 @@ var bindTabs = function() {
   $('#issue-filter').click(function(){
     $('.ui-dialog').remove();
     $('#klass').val('Issue');
+    setClassActive(this);
+    setSearchPeriod();
+    setCurrentPeriod(this);
+  });
+
+  $('#wiki-filter').click(function(){
+    $('.ui-dialog').remove();
+    $('#klass').val('WikiPage');
+    setClassActive(this);
     setSearchPeriod();
     setCurrentPeriod(this);
   });
 }
 
+var setClassActive = function(el){
+  $('.filter-btn').removeClass('active');
+  $(el).addClass('active');
+}
+
 var bindConditions = function(){
   bindModalDate();
   $("#select2project").select2({
-    placeholder: "Project",
-    allowClear: true
+    language: "en"
   });
 
   $("#selectPeriod").click(function() {
@@ -109,25 +123,19 @@ var bindConditions = function(){
     }
   });
   $("#select2users").select2({
-    placeholder: "User",
-    allowClear: true,
-    containerCssClass: "UserSelectElement"
+    language: "en"
   });
   $("#select2tracker").select2({
-    placeholder: "Tracker",
-    allowClear: true
+    language: "en"
   });
   $("#select2priority").select2({
-    placeholder: "Priority",
-    allowClear: true
+    language: "en"
   });
   $("#select2status").select2({
-    placeholder: "Status",
-    allowClear: true
+    language: "en"
   });
   $("#select2roles").select2({
-    placeholder: "My roles",
-    allowClear: true
+    language: "en"
   });
 }
 
