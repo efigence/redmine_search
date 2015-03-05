@@ -24,4 +24,11 @@ module RedmineSearch
   def get_results
     get_search_class
   end
+
+  def self.elastic_search_language
+    default = "English"
+    Setting.plugin_redmine_search['search_language'] || default
+  rescue
+    default
+  end
 end
