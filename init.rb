@@ -1,4 +1,5 @@
 # encoding: utf-8
+require 'redmine'
 require 'redmine_search'
 
 Redmine::Plugin.register :redmine_search do
@@ -13,13 +14,17 @@ Redmine::Plugin.register :redmine_search do
     :searching, { controller: 'searching', action: 'index'},
     caption: :label_search, :after => :help
 
-  settings :default => {
+  default_settings = {
+    'search_language' => 'English',
+    'file_size' => "5"
+  }
 
-    }, partial: 'settings/redmine_search_settings'
+  settings(:default => default_settings, :partial => 'settings/redmine_search_settings')
 end
 
 ActiveSupport.on_load :after_initialize, yield: true do
   require 'redmine_search/patches/issue_patch'
   require 'redmine_search/patches/project_patch'
   require 'redmine_search/patches/wiki_page_patch'
+  require 'redmine_search/patches/attachment_patch'
 end

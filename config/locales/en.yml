@@ -36,6 +36,11 @@ en:
   label_all: All
   label_public: Public
   label_private: Private
+  label_serach_in_attachments: Attachments
+  label_only_attachments: Only attachments
+  label_with_attachments: With attachments
+  label_without_attachments: Without attachments
   allowed_groups_to_see_private_issues: Allowed groups to see private issues
   allowed_users_to_see_private_issues: Allowed users to see private issues
   searching_language: Choose searching language
+  max_file_size: 'Max size of indexed file(attachment MB)'

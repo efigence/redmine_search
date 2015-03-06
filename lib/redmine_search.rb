@@ -31,4 +31,18 @@ module RedmineSearch
   rescue
     default
   end
+
+  def self.read_attached_files files
+    text = []
+    max_file_size = Setting.plugin_redmine_search['file_size'].to_i.megabytes
+    filespath = files.collect(&:diskfile)
+    filespath.each do |filepath|
+      if File.exists?(filepath) && File.size?(filepath) <= max_file_size
+        data = File.read filepath
+        ctext = Yomu.read :text, data #only text, without encoding etc..
+        text << ctext
+      end
+    end
+    return text
+  end
 end

@@ -3,8 +3,8 @@ require File.expand_path('../../test_helper', __FILE__)
 class SearchingControllerTest < ActionController::TestCase
   self.fixture_path = File.join(File.dirname(__FILE__), '../fixtures')
 
-  fixtures :issues, :projects, :members
-
+  fixtures :issues, :projects, :members, :users
+  # TODO - Attachments test
   def setup
     setup_client
     setup_issue_index

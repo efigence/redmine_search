@@ -19,4 +19,6 @@
     <%= select_tag :is_private, options_for_select(issue_privacy_option, params[:is_private]), class: 'selectsFields' %>
   <% end %>
 
+  <%= select_tag :attachment, options_for_select(attachment_options, params[:attachment]), id: 'selectAttachment', class: 'selectsFields' %>
+
 <% end %>

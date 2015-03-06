@@ -9,6 +9,12 @@ module RedmineSearch
 
           Searchkick.search_method_name = :elastic_search
           searchkick language: RedmineSearch.elastic_search_language unless Issue.respond_to?(:searchkick_index)
+          def search_data
+            attributes.merge(
+              attachment: attachments.map(&:filename),
+              attachment_text: RedmineSearch.read_attached_files(attachments)
+            )
+          end
         end
       end
     end

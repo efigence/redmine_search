@@ -15,7 +15,7 @@ class SearchingController < ApplicationController
   def esearch
     @resutls = get_results
     @results = {
-      next_page: @results.current_page + 1,
+      next_page: @results.next_page,
       total_pages: @results.total_pages,
       entries: @results.entries,
       klass: params[:klass].constantize.name,
@@ -24,7 +24,7 @@ class SearchingController < ApplicationController
       esearch: params[:esearch]
     }
     # session[:esearch] = params
-    render partial: 'esearch' if request.xhr?
+    render partial: 'esearch'
   end
 
   def cleanup

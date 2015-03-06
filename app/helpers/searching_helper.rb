@@ -40,6 +40,14 @@ module SearchingHelper
     User.current.admin? ? Project.all : User.current.projects
   end
 
+  def attachment_options
+    [
+      [l(:label_without_attachments), ""],
+      [l(:label_only_attachments), 'only'],
+      [l(:label_with_attachments), 'with']
+    ]
+  end
+
   def date_range
     params[:period] == "dr" ? "#{params[:from]} - #{params[:to]}" : l(:label_data_range)
   end

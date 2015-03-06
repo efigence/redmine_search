@@ -36,6 +36,11 @@ pl:
   label_all: Wszystkie
   label_public: Publiczne
   label_private: Prywatne
+  label_serach_in_attachments: Załączniki
+  label_only_attachments: Tylko załączniki
+  label_with_attachments: Razem z załącznikami
+  label_without_attachments: Bez złączników
   allowed_groups_to_see_private_issues: "Grupy, które mogą widzieć prywatne zagadnienia"
   allowed_users_to_see_private_issues: "Użytkownicy, którzy mogą widzieć prywatne zagadnienia"
   searching_language: Wybierz język wyszukiwania
+  max_file_size: 'Maksymalna wielkość pliku do indeksacji(załącznik w MB)'

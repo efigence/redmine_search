@@ -11,7 +11,10 @@
       ), :multiple => true, class: "selectize" %>
 
 <h3><%= l(:searching_language)%></h3>
-<%= select_tag 'settings[search_language]', options_for_select(YAML.load_file(Rails.root.join('plugins/redmine_search/config/languages.yml')), @settings['search_language']) %>
+<%= select_tag 'settings[search_language]', options_for_select(YAML.load_file(Rails.root.join('plugins/redmine_search/config/languages.yml')), @settings['search_language']), class: "selectize" %>
+
+<h3><%= l(:max_file_size)%></h3>
+<%= text_field_tag 'settings[file_size]', @settings['file_size'] %>
 
 <style>
   div.box {
