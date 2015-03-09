@@ -14,6 +14,7 @@ run: <tt> bundle exec rake redmine_search:reindex </tt>
   - To see all issues/projects/etc.. set query : "*".
   - 10 results per page + load more button
   - Searching in files(attachmets like doc/pdf/csv/xml/xlsx/odt/etc..)
+
 # Available filters
   0. Base(in every tabs)
     - Date(periods/data range) - remembered on tab switch.
