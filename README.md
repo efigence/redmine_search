@@ -11,7 +11,6 @@ This is work in progress, do not use it!
  - In main redmine catalog run: <tt> bundle exec rake redmine_search:reindex </tt>
 2. If you want stop Elasticsearch engine
  - Run <tt>sudo service elasticsearch stop</tt>
- - You can remove indexes by rails console by: <tt>Issue.clean_indices</tt>
 3. If you are using PROXY
  - move <tt>config/initializers/elasticsearch.rb.default</tt> to <tt>redmine/config/initializers/</tt>
  - move <tt>config/elasticsearch.yml.default</tt> to <tt>redmine/config/</tt>
@@ -32,7 +31,7 @@ This is work in progress, do not use it!
   - Searching in files(attachmets like doc/pdf/csv/xml/xlsx/odt/etc..)
 
 ## Available filters
-  0. Base(in every tabs)
+  0. Base(each tabs)
     - Date(periods/data range) - remembered on tab switch.
     - Order (newest/oldest) - by default order by newest.
   1. Issues
