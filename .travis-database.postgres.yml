@@ -1,0 +1,4 @@
+test:
+  adapter: postgresql
+  database: redmine_search_test
+  username: postgres
