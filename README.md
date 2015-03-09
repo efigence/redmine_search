@@ -1,25 +1,39 @@
-# Redmine Search with Searchkick
+== Redmine Search with Searchkick
 
 This is work in progress, do not use it!
 
-Make sure that you have installed Elastisearch or install from: example.com.
+== Install
+[1. Make sure that JAVA and Elasticsearch was installed]
+ - Install ElasticSearch from <tt>http://www.elasticsearch.org/download/ </tt>
+ - Test your connection <tt>curl -XGET 'http://localhost:9200'</tt> - status should equal 200
+ - Switch search engine in Admin panel to <tt>Elasticsearch Engine</tt> and choose language. (by default is English)
+ - Run Elasticsearch <tt>sudo service elasticsearch start</tt>
+ - In main redmine catalog run: <tt> bundle exec rake redmine_search:reindex </tt>
+[2. If you want stop Elasticsearch engine]
+ - Run <tt>sudo service elasticsearch stop</tt>
+ - You can remove indexes by rails console by: <tt>Issue.clean_indices</tt>
+[3. If you are using PROXY]
+ - move <tt>config/initializers/elasticsearch.rb.default</tt> to <tt>redmine/config/initializers/</tt>
+ - move <tt>config/elasticsearch.yml.default</tt> to <tt>redmine/config/</tt>
+[4. Another languages]
+ - Install plugin to elasticsearch, guide: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-plugins.html
+ - Write configuration(settings) in issue_patch.rb and add language to languages.yml file.
+[5. Elastic Management]
+ - If you want manege your elastic and indexes, then install plugin: http://www.elastichq.org/
+ - If it's done then go to: <tt>http://localhost:9200/_plugin/HQ/</tt> and connect.
 
-See sample config files in initializers/ and config/.
-
-run: <tt> bundle exec rake redmine_search:reindex </tt>
-
-# Searching
+=== Searching
   - Go to /searching or click top menu button
   - For now there is few tabs available. When u switch between tabs then search date will be remembered.
   - To see all issues/projects/etc.. set query : "*".
   - 10 results per page + load more button
   - Searching in files(attachmets like doc/pdf/csv/xml/xlsx/odt/etc..)
 
-# Available filters
-  0. Base(in every tabs)
+=== Available filters
+  [0. Base(in every tabs)]
     - Date(periods/data range) - remembered on tab switch.
     - Order (newest/oldest) - by default order by newest.
-  1. Issues
+  [1. Issues]
     - Projects
     - Tracker
     - User
@@ -27,13 +41,13 @@ run: <tt> bundle exec rake redmine_search:reindex </tt>
     - Status
     - Issue type(private/public), by default only Admin user is allowed to search in private issues(change setting if you want allow some users or some groups).
     - Attachments - (without/with/only) - it's means that you can search issues only by attachments content or with or do not take attachments in search params.
-  2. Projects
+  [2. Projects]
     - Project status(all/open/close/archive)
     - My role - ex. search Project 'x' where I'm 'Developer and Project Manager'
-  3. Wiki Pages
+  [3. Wiki Pages]
     - Attachments
 
-# Settings
+=== Settings
   - Set allowed groups/users to search in private issues.
   - If you are using sidekiq then enable Index Async, to speed up (it's recommended because after_commit on attached file is really slow).
   - By default searchkick use English language and stemm. After change search language run reindexing.
