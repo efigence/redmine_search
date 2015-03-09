@@ -54,7 +54,7 @@ This is work in progress, do not use it!
   - By default searchkick use English language and stemm. After change search language run reindexing.
 
 ## License
-  Redmine search plugin
+  Redmine search plugin.
   Copyright (C) 2015 Efigence S.A.
 
   This program is free software: you can redistribute it and/or modify
