@@ -13,7 +13,8 @@ module RedmineSearch
             model = self.container_type.constantize
             if model.respond_to?(:searchkick_index)
               id = self.container_id.to_i
-              model.find(id).reindex
+              async_reindex = Setting.plugin_redmine_search['async_indexing'] == "1"
+              async_reindex ? model.find(id).reindex_async : model.find(id).reindex
             end
           end
         end

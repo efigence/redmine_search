@@ -3,10 +3,11 @@ require File.expand_path('../../test_helper', __FILE__)
 class SearchingControllerTest < ActionController::TestCase
   self.fixture_path = File.join(File.dirname(__FILE__), '../fixtures')
 
-  fixtures :issues, :projects, :members, :users
+  fixtures :issues, :projects, :members, :users, :attachments
   # TODO - Attachments test
   def setup
     setup_client
+    set_plugin_fixtures_attachments_directory
     setup_issue_index
     setup_project_index
   end
@@ -32,8 +33,18 @@ class SearchingControllerTest < ActionController::TestCase
     Setting.destroy_all
     Setting.clear_cache
     Setting['plugin_redmine_search'] = {
-      'users' => ["1"]
+      'users' => ["1"],
+      'search_language' => 'English',
+      'file_size' => "5",
+      'async_indexing' => "0"
     }
+  end
+
+  def allow_user_admin
+    session[:allowed_to_private] = true
+    a = User.current
+    a.admin = true
+    a.save
   end
 
   #------------------ISSUES------------------
@@ -140,15 +151,12 @@ class SearchingControllerTest < ActionController::TestCase
   end
 
   test 'search admin should see all issue(private, public)' do
-    session[:allowed_to_private] = true
-    a = User.current
-    a.admin = true
-    a.save
+    allow_user_admin
     get :esearch, esearch: '*', klass: "Issue", is_private: 'all'
     entries_priv = assigns(:results)["entries"].collect(&:is_private).count(true)
     issues_priv = Issue.where(is_private: true).count
     assert_equal issues_priv, entries_priv, 'Should equal to private issues!'
-    assert_equal 5, assigns(:results)["total"], 'Should found 5 issue!'
+    assert_equal 10, assigns(:results)["total"], 'Should found 10 issue! - all issues'
   end
 
   #------------------PROJECTS------------------
@@ -165,5 +173,21 @@ class SearchingControllerTest < ActionController::TestCase
   test 'search projects with period conditions' do
     get :esearch, esearch: 'test', klass: "Project", condition: true, period: "w"
     assert_equal 1, assigns(:results)["total"], 'Wrong total count! Should equal 1!'
+  end
+
+  #------------------ATTACHMENTS(PDF/ODT/CSV/DOC/ODP)-----------------
+  test 'search issue only by attachments content' do
+    set_settings
+    allow_user_admin
+    get :esearch, esearch: 'test', klass: "Issue", is_private: 'all', attachment: "only"
+    assert_equal 5, assigns(:results)["total"], 'Wrong total count! Should return 5!'
+  end
+
+  test 'search issue with attachments content' do
+    #by defautl return 3 but with attachments should return 8
+    set_settings
+    allow_user_admin
+    get :esearch, esearch: 'test', klass: "Issue", is_private: 'all', attachment: "with"
+    assert_equal 8, assigns(:results)["total"], 'Wrong total count! Should return 8!'
   end
 end

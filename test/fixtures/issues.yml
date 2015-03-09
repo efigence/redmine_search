@@ -101,3 +101,108 @@ issues_005:
   lft: 1
   rgt: 2
   lock_version: 3
+issues_006:
+  created_on: <%= 2.days.ago.to_s(:db) %>
+  project_id: 3
+  updated_on: <%= 1.day.ago.to_s(:db) %>
+  priority_id: 2
+  subject: Issue with csv attachment
+  id: 6
+  fixed_version_id:
+  category_id: 1
+  description: Attachment csv
+  tracker_id: 1
+  assigned_to_id: 1
+  author_id: 1
+  status_id: 2
+  is_private: true
+  start_date: <%= 1.day.ago.to_date.to_s(:db) %>
+  due_date: <%= 10.day.from_now.to_date.to_s(:db) %>
+  root_id: 2
+  lft: 1
+  rgt: 2
+  lock_version: 3
+issues_007:
+  created_on: <%= 2.days.ago.to_s(:db) %>
+  project_id: 3
+  updated_on: <%= 1.day.ago.to_s(:db) %>
+  priority_id: 2
+  subject: Issue with doc attachment
+  id: 7
+  fixed_version_id:
+  category_id: 1
+  description: Attachment doc
+  tracker_id: 1
+  assigned_to_id: 1
+  author_id: 1
+  status_id: 2
+  is_private: true
+  start_date: <%= 1.day.ago.to_date.to_s(:db) %>
+  due_date: <%= 10.day.from_now.to_date.to_s(:db) %>
+  root_id: 2
+  lft: 1
+  rgt: 2
+  lock_version: 3
+issues_008:
+  created_on: <%= 2.days.ago.to_s(:db) %>
+  project_id: 3
+  updated_on: <%= 1.day.ago.to_s(:db) %>
+  priority_id: 2
+  subject: Issue with pdf attachment
+  id: 8
+  fixed_version_id:
+  category_id: 1
+  description: Attachment pdf
+  tracker_id: 1
+  assigned_to_id: 1
+  author_id: 1
+  status_id: 2
+  is_private: true
+  start_date: <%= 1.day.ago.to_date.to_s(:db) %>
+  due_date: <%= 10.day.from_now.to_date.to_s(:db) %>
+  root_id: 2
+  lft: 1
+  rgt: 2
+  lock_version: 3
+issues_009:
+  created_on: <%= 2.days.ago.to_s(:db) %>
+  project_id: 3
+  updated_on: <%= 1.day.ago.to_s(:db) %>
+  priority_id: 2
+  subject: Issue with presentation attachment
+  id: 9
+  fixed_version_id:
+  category_id: 1
+  description: Attachment presentation
+  tracker_id: 1
+  assigned_to_id: 1
+  author_id: 1
+  status_id: 2
+  is_private: true
+  start_date: <%= 1.day.ago.to_date.to_s(:db) %>
+  due_date: <%= 10.day.from_now.to_date.to_s(:db) %>
+  root_id: 2
+  lft: 1
+  rgt: 2
+  lock_version: 3
+issues_010:
+  created_on: <%= 2.days.ago.to_s(:db) %>
+  project_id: 3
+  updated_on: <%= 1.day.ago.to_s(:db) %>
+  priority_id: 2
+  subject: Issue with xlsx attachment
+  id: 10
+  fixed_version_id:
+  category_id: 1
+  description: Attachment xlsx
+  tracker_id: 1
+  assigned_to_id: 1
+  author_id: 1
+  status_id: 2
+  is_private: true
+  start_date: <%= 1.day.ago.to_date.to_s(:db) %>
+  due_date: <%= 10.day.from_now.to_date.to_s(:db) %>
+  root_id: 2
+  lft: 1
+  rgt: 2
+  lock_version: 3

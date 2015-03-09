@@ -44,3 +44,7 @@ pl:
   allowed_users_to_see_private_issues: "Użytkownicy, którzy mogą widzieć prywatne zagadnienia"
   searching_language: Wybierz język wyszukiwania
   max_file_size: 'Maksymalna wielkość pliku do indeksacji(załącznik w MB)'
+  async_index: Używaj indeksacji asynchronicznej
+  not_async: Wyłączony
+  async: Włączony
+  async_indexing_info: "Indeksowanie asynchroniczne jest rekomendowane w przypadku użycia callbacków.(np.: Class.reinde after_commit będzie zbyt wolny), wtedy warto używać indexakcji asynchronicznej. Dla Rails <= 3.2 powinno skonfigurować się sidekiq lub dla Rails >= 4 ActiveJob."

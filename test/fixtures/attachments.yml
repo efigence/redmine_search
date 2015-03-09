@@ -1,0 +1,70 @@
+attachments_001: 
+  content_type:
+  downloads: 0
+  created_on: 2015-03-03 16:14:50 +09:00
+  disk_filename: csv_file.csv
+  disk_directory: "search_files/"
+  container_id: 6
+  digest: 8e0294de2441577c529f170b6fb8f638
+  id: 1
+  container_type: Issue
+  description: ""
+  filename: csv_file.csv
+  filesize: 27
+  author_id: 2
+attachments_002: 
+  content_type:
+  downloads: 0
+  created_on: 2015-03-03 16:14:50 +09:00
+  disk_filename: doc_file.odt
+  disk_directory: "search_files/"
+  container_id: 7
+  digest: 20e2062f212c47df9b9a9c127eb34b2f
+  id: 2
+  container_type: Issue
+  description: ""
+  filename: doc_file.odt
+  filesize: 8977
+  author_id: 2
+attachments_003: 
+  content_type:
+  downloads: 0
+  created_on: 2015-03-03 16:14:50 +09:00
+  disk_filename: pdf_file.pdf
+  disk_directory: "search_files/"
+  container_id: 8
+  digest: 849602af7cfd618ea6d05ae0c2ef02d0
+  id: 3
+  container_type: Issue
+  description: ""
+  filename: pdf_file.pdf
+  filesize: 9051
+  author_id: 2
+attachments_004: 
+  content_type:
+  downloads: 0
+  created_on: 2015-03-03 16:14:50 +09:00
+  disk_filename: presentation_file.odp
+  disk_directory: "search_files/"
+  container_id: 9
+  digest: b7cab98d536d02eb33785ef32da6fc07
+  id: 4
+  container_type: Issue
+  description: ""
+  filename: presentation_file.odp
+  filesize: 15398
+  author_id: 2
+attachments_005: 
+  content_type:
+  downloads: 0
+  created_on: 2015-03-03 16:14:50 +09:00
+  disk_filename: xlsx_file.ods
+  disk_directory: "search_files/"
+  container_id: 10
+  digest: 228cd59ec13bdf28ef907bef0e9c3f60
+  id: 5
+  container_type: Issue
+  description: ""
+  filename: xlsx_file.ods
+  filesize: 12523
+  author_id: 2

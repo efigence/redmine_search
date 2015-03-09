@@ -1,21 +1,34 @@
 <%= stylesheet_link_tag '/plugin_assets/redmine_search/stylesheets/selectize.default.css' %>
 <%= javascript_include_tag '/plugin_assets/redmine_search/javascripts/selectize' %>
-<h3><%= l(:allowed_groups_to_see_private_issues) %></h3>
-  <%= select_tag "settings[groups][]",
-    options_from_collection_for_select(Group.all.sort, 'id', 'lastname', @settings['groups']
-      ), :multiple => true, class: "selectize" %>
+<p>
+  <label><%= l(:allowed_groups_to_see_private_issues) %></label>
+    <%= select_tag "settings[groups][]",
+      options_from_collection_for_select(Group.all.sort, 'id', 'lastname', @settings['groups']
+        ), :multiple => true, class: "selectize" %>
 
-<h3><%= l(:allowed_users_to_see_private_issues) %></h3>
+
+  <label><%= l(:allowed_users_to_see_private_issues) %></label>
   <%= select_tag "settings[users][]",
     options_from_collection_for_select(User.all.sort, 'id', 'name', @settings['users']
       ), :multiple => true, class: "selectize" %>
 
-<h3><%= l(:searching_language)%></h3>
-<%= select_tag 'settings[search_language]', options_for_select(YAML.load_file(Rails.root.join('plugins/redmine_search/config/languages.yml')), @settings['search_language']), class: "selectize" %>
 
-<h3><%= l(:max_file_size)%></h3>
-<%= text_field_tag 'settings[file_size]', @settings['file_size'] %>
+  <label><%= l(:searching_language)%></label>
+  <%= select_tag 'settings[search_language]', options_for_select(YAML.load_file(Rails.root.join('plugins/redmine_search/config/languages.yml')), @settings['search_language']), class: "selectize" %>
 
+
+  <label><%= l(:max_file_size)%></label>
+  <%= text_field_tag 'settings[file_size]', @settings['file_size'] %><br/>
+
+
+  <label><%= l(:async_index)%></label>
+  <%= select_tag 'settings[async_indexing]', options_for_select({
+                l(:not_async) => "0",
+                l(:async) => "1"
+                }, @settings['async_indexing'])
+    %>
+  <em class="info"><%= l(:async_indexing_info) %></em>
+</p>
 <style>
   div.box {
     overflow: initial;

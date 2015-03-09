@@ -40,7 +40,11 @@ en:
   label_only_attachments: Only attachments
   label_with_attachments: With attachments
   label_without_attachments: Without attachments
-  allowed_groups_to_see_private_issues: Allowed groups to see private issues
-  allowed_users_to_see_private_issues: Allowed users to see private issues
+  allowed_groups_to_see_private_issues: Allowed groups to search in private issues
+  allowed_users_to_see_private_issues: Allowed users to search in private issues
   searching_language: Choose searching language
   max_file_size: 'Max size of indexed file(attachment MB)'
+  async_index: Use async indexing
+  not_async: Disable
+  async: Enable
+  async_indexing_info: "Async index is recomended for callback's.(for example: Class.reindex after commit will be realy slow) then you should use async reindex. You can configure sidekiq for Rails <= 3.2 or ActiveJob for Rails 4."

@@ -16,7 +16,8 @@ Redmine::Plugin.register :redmine_search do
 
   default_settings = {
     'search_language' => 'English',
-    'file_size' => "5"
+    'file_size' => "5",
+    'async_indexing' => "0"
   }
 
   settings(:default => default_settings, :partial => 'settings/redmine_search_settings')
