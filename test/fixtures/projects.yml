@@ -37,3 +37,16 @@ projects_003:
   parent_id: 
   lft: 1
   rgt: 10
+projects_004:
+  created_on: <%= 1.year.ago.to_s(:db) %>
+  name: Project with Wiki
+  updated_on: 2014-07-20 00:33:01 +02:00
+  id: 4
+  description: WIKIPROJECTFIRST5
+  homepage: http://projects_004.somenet.foo/
+  is_public: true
+  status: 5
+  identifier: projects_004
+  parent_id: 
+  lft: 1
+  rgt: 10

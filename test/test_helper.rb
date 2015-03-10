@@ -8,7 +8,7 @@ end
 class ActionController::TestCase
 
   # XXX: redmine master branch is not compatible with other branches
-  fx = [:attachments, :projects, :issues, :members]
+  fx = [:attachments, :projects, :issues, :members, :wikis, :wiki_pages, :wiki_contents]
   fx2 = [:users]
 
   fixtures *fx

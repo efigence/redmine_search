@@ -1,15 +1,11 @@
 require File.expand_path('../../test_helper', __FILE__)
 
 class SearchingControllerTest < ActionController::TestCase
-  self.fixture_path = File.join(File.dirname(__FILE__), '../fixtures')
 
-  fixtures :issues, :projects, :members, :users, :attachments
-  # TODO - Attachments test
   def setup
     setup_client
     set_plugin_fixtures_attachments_directory
-    setup_issue_index
-    setup_project_index
+    %w(Issue Project WikiPage).each {|model| setup_index(model)}
   end
 
   def setup_client
@@ -17,16 +13,11 @@ class SearchingControllerTest < ActionController::TestCase
     Searchkick.client = Elasticsearch::Client.new(config)
   end
 
-  def setup_issue_index
-    Issue.searchkick_index.delete if Issue.searchkick_index.exists?
-    Issue.enable_search_callbacks
-    Issue.reindex
-  end
-
-  def setup_project_index
-    Project.searchkick_index.delete if Project.searchkick_index.exists?
-    Project.enable_search_callbacks
-    Project.reindex
+  def setup_index model
+    model = model.constantize
+    model.searchkick_index.delete if model.searchkick_index.exists?
+    model.enable_search_callbacks
+    model.reindex
   end
 
   def set_settings
@@ -47,7 +38,10 @@ class SearchingControllerTest < ActionController::TestCase
     a.save
   end
 
-  #------------------ISSUES------------------
+  # -----------------Fixtures-----------------
+  %w(Issue Project Wiki WikiPage WikiContent Attachment Member User).each {|m| puts "#{m} -> #{m.constantize.count}"}
+
+  # ------------------ISSUES------------------
   test 'search issues without conditions' do
     get :esearch, esearch: 'test', klass: "Issue"
     assert_equal "Issue", assigns(:results)["klass"], 'Wrong class name!'
@@ -175,6 +169,13 @@ class SearchingControllerTest < ActionController::TestCase
     assert_equal 1, assigns(:results)["total"], 'Wrong total count! Should equal 1!'
   end
 
+  test 'should return all projects when query *' do
+    allow_user_admin
+    get :esearch, esearch: '*', klass: "Project"#, condition: true, period: "w"
+    assert_equal Project.count, assigns(:results)["total"], 'Wrong total count! Should return projects!'
+    assert_equal 4, assigns(:results)["total"], 'Wrong total count! Should return 4!'
+  end
+
   #------------------ATTACHMENTS(PDF/ODT/CSV/DOC/ODP)-----------------
   test 'search issue only by attachments content' do
     set_settings
@@ -189,5 +190,11 @@ class SearchingControllerTest < ActionController::TestCase
     allow_user_admin
     get :esearch, esearch: 'test', klass: "Issue", is_private: 'all', attachment: "with"
     assert_equal 8, assigns(:results)["total"], 'Wrong total count! Should return 8!'
+  end
+
+  test 'search wikipages' do
+    allow_user_admin
+    get :esearch, esearch: 'test', klass: "WikiPage"
+    assert_equal 1, assigns(:results)["total"], 'Wrong count of WikiPages! Should be 1!'
   end
 end
