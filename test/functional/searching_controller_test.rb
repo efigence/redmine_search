@@ -6,6 +6,7 @@ class SearchingControllerTest < ActionController::TestCase
     setup_client
     set_plugin_fixtures_attachments_directory
     %w(Issue Project WikiPage).each {|model| setup_index(model)}
+    @request.session[:user_id] = 1
   end
 
   def setup_client
@@ -32,11 +33,8 @@ class SearchingControllerTest < ActionController::TestCase
   end
 
   def allow_user_admin
-    @request.session[:user_id] = 1
-    session[:allowed_to_private] = true
-    a = User.current
-    a.admin = true
-    a.save
+    @request.session[:user_id] = 4
+    @request.session[:allowed_to_private] = true
   end
 
   # -----------------Fixtures-----------------
@@ -94,7 +92,7 @@ class SearchingControllerTest < ActionController::TestCase
 
   #----------------PERMISSIONS-----------------
   test 'search without defined permissions' do
-    session[:allowed_to_private] = false
+    @request.session[:allowed_to_private] = false
     get :esearch, esearch: 'test', klass: "Issue"
     assert_equal 2, assigns(:results)["total"], 'Wrong total count! Should equal 2!'
   end
@@ -108,25 +106,25 @@ class SearchingControllerTest < ActionController::TestCase
 
   test 'search as user with permission' do
     set_settings
-    session[:allowed_to_private] = true
+    @request.session[:allowed_to_private] = true
     get :esearch, esearch: 'test', klass: "Issue"
     assert_equal 3, assigns(:results)["total"], 'Wrong total count! Should equal 2!'
   end
 
   test 'search as user should not be possible to find private issues' do
-    session[:allowed_to_private] = false
+    @request.session[:allowed_to_private] = false
     get :esearch, esearch: 'test', klass: "Issue", is_private: 'true'
     assert_equal 2, assigns(:results)["total"], 'Wrong total count! Should equal 2!'
   end
 
   test 'search as allowed user should be possible to find private issues' do
-    session[:allowed_to_private] = true
+    @request.session[:allowed_to_private] = true
     get :esearch, esearch: 'test', klass: "Issue", is_private: 'true'
     assert_equal 1, assigns(:results)["total"], 'Wrong total count! Should equal 2!'
   end
 
   test 'search as not allowed user' do
-    session[:allowed_to_private] = false
+    @request.session[:allowed_to_private] = false
     get :esearch, esearch: '*', klass: "Issue", is_private: 'true'
     entries = assigns(:results)["entries"].collect(&:id)
     priv_issues = Issue.select('id, is_private').where(is_private: true).collect(&:id)
@@ -135,7 +133,7 @@ class SearchingControllerTest < ActionController::TestCase
   end
 
   test 'search all as allowed user' do
-    session[:allowed_to_private] = true
+    @request.session[:allowed_to_private] = true
     get :esearch, esearch: '*', klass: "Issue", is_private: 'true'
     entries = assigns(:results)["entries"].collect(&:id)
     priv_issues = Issue.select('id, is_private').where(is_private: true).collect(&:id)
@@ -169,7 +167,7 @@ class SearchingControllerTest < ActionController::TestCase
 
   test 'should return all projects when query *' do
     allow_user_admin
-    get :esearch, esearch: '*', klass: "Project"#, condition: true, period: "w"
+    get :esearch, esearch: '*', klass: "Project"
     assert_equal Project.count, assigns(:results)["total"], 'Wrong total count! Should return projects!'
     assert_equal 4, assigns(:results)["total"], 'Wrong total count! Should return 4!'
   end
@@ -187,7 +185,7 @@ class SearchingControllerTest < ActionController::TestCase
     set_settings
     allow_user_admin
     get :esearch, esearch: 'test', klass: "Issue", is_private: 'all', attachment: "with"
-    assert_equal 8, assigns(:results)["total"], 'Wrong total count! Should return 8!'
+    assert_equal 10, assigns(:results)["total"], 'Wrong total count! Should return 10(issues test and attach test!'
   end
 
   test 'search wikipages' do
