@@ -32,6 +32,7 @@ class SearchingControllerTest < ActionController::TestCase
   end
 
   def allow_user_admin
+    @request.session[:user_id] = 1
     session[:allowed_to_private] = true
     a = User.current
     a.admin = true
@@ -100,10 +101,7 @@ class SearchingControllerTest < ActionController::TestCase
 
   test 'search as admin' do
     set_settings
-    session[:allowed_to_private] = true
-    a = User.current
-    a.admin = true
-    a.save
+    allow_user_admin
     get :esearch, esearch: 'test', klass: "Issue"
     assert_equal 5, assigns(:results)["total"], 'Wrong total count! Should equal 5!'
   end
