@@ -48,7 +48,7 @@ class SearchingControllerTest < ActionController::TestCase
     assert_equal assigns(:results)[:total].to_i, assigns(:results)[:entries].count, "There should not be difference!"
     entries = assigns(:results)[:entries].collect(&:id)
     issues = User.current.projects.joins(:issues).collect(&:id).uniq
-    assert_equal issues, entries, 'Wrong issues selected!'
+    assert_equal issues.sort, entries.sort, 'Wrong issues selected!'
   end
 
   test 'search issues with project condition' do
