@@ -21,8 +21,6 @@ This is work in progress, do not use it!
  - If you want manege your elastic and indexes, then install plugin: http://www.elastichq.org/
  - If it's done then go to: <tt>http://localhost:9200/_plugin/HQ/</tt> and connect.
 
-
-
 ## Searching
   - Go to /searching or click top menu button
   - For now there is few tabs available. When u switch between tabs then search date will be remembered.
