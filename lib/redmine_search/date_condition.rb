@@ -14,8 +14,8 @@ module RedmineSearch
       when "y"
         p = 1.year.ago..DateTime.now
       when "dr"
-        from = @params[:from].blank? ? DateTime.now : @params[:from].to_datetime
-        to = @params[:to].blank? ? DateTime.now : @params[:to].to_datetime
+        from = @params[:from].blank? ? DateTime.now - 100.years : @params[:from].to_datetime
+        to = @params[:to].blank? ? DateTime.now + 100.years : @params[:to].to_datetime
         p = from > to ? to..from : from..to
       end
       @conditions[:created_on] = p

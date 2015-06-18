@@ -1,4 +1,5 @@
 pl:
+  field_time_entries_disabled: Nie możesz raportować czasu do tego projektu
   apply: Zastosuj
   load_more: 'Załaduj więcej (%{to_load})'
   filter_issues: Zagadnienia
@@ -36,10 +37,12 @@ pl:
   label_all: Wszystkie
   label_public: Publiczne
   label_private: Prywatne
-  label_serach_in_attachments: Załączniki
+  label_serach_in_attachments: "Również&nbsp;w&nbsp;załącznikach"
   label_only_attachments: Tylko załączniki
   label_with_attachments: Razem z załącznikami
   label_without_attachments: Bez złączników
+  label_search_mode_fuzzy: przybliżone
+  label_search_mode_phrase: wyrażenie
   allowed_groups_to_see_private_issues: "Grupy, które mogą widzieć prywatne zagadnienia"
   allowed_users_to_see_private_issues: "Użytkownicy, którzy mogą widzieć prywatne zagadnienia"
   searching_language: Wybierz język wyszukiwania
@@ -48,3 +51,4 @@ pl:
   not_async: Wyłączony
   async: Włączony
   async_indexing_info: "Indeksowanie asynchroniczne jest rekomendowane w przypadku użycia callbacków.(np.: Class.reinde after_commit będzie zbyt wolny), wtedy warto używać indexakcji asynchronicznej. Dla Rails <= 3.2 powinno skonfigurować się sidekiq lub dla Rails >= 4 ActiveJob."
+  search_page: "Strona %{page}"

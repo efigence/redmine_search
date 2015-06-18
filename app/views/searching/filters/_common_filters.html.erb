@@ -1,0 +1,5 @@
+<wbr>
+<span class="common-filters Issue-filters WikiPage-filters filters" style="display: <%= params[:klass] == 'Issue' || params[:klass] == 'WikiPage' ? 'initial' : 'none' %>">
+  <%= check_box_tag :attachment, true, !params[:attachment].blank?, id: :search_in_attachments, class: 'filter Issue-filter WikiPage-filter js-submit-form' %>
+  <%= label_tag :search_in_attachments, t('label_serach_in_attachments').html_safe, class: 'filter Issue-filter WikiPage-filter' %>
+</span>

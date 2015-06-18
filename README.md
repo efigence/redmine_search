@@ -1,6 +1,7 @@
 # Redmine Search with Searchkick
 
-This is work in progress, do not use it!
+This plugin allows users to search information in Project, Issues, WikiPages by fuzzy or phrase method.
+There is available many filters for each tabs. Moreover this plugin overrides redmine core search.
 
 ## Install
 1. Make sure that JAVA and Elasticsearch was installed
@@ -22,11 +23,12 @@ This is work in progress, do not use it!
  - If it's done then go to: <tt>http://localhost:9200/_plugin/HQ/</tt> and connect.
 
 ## Searching
-  - Go to /searching or click top menu button
-  - For now there is few tabs available. When u switch between tabs then search date will be remembered.
+  - Search will be available in top menu and in top right input search.
+  - When you switch between tabs then search date will be remembered.
   - To see all issues/projects/etc.. set query : "*".
   - 10 results per page + load more button
   - Searching in files(attachmets like doc/pdf/csv/xml/xlsx/odt/etc..)
+  - The matching words will be highlighted.
 
 ## Available filters
   0. Base(each tabs)
@@ -39,7 +41,7 @@ This is work in progress, do not use it!
     - Priority
     - Status
     - Issue type(private/public), by default only Admin user is allowed to search in private issues(change setting if you want allow some users or some groups).
-    - Attachments - (without/with/only) - it's means that you can search issues only by attachments content or with or do not take attachments in search params.
+    - With attachments - it's means that you can search issues and attachments content.
   2. Projects
     - Project status(all/open/close/archive)
     - My role - ex. search Project 'x' where I'm 'Developer and Project Manager'

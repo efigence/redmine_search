@@ -1,0 +1,4 @@
+<wbr>
+<span class="common-filters Issue-filters WikiPage-filters filters" style="display: <%= params[:klass] == 'Issue' || params[:klass] == 'WikiPage' ? 'initial' : 'none' %>">
+  <%= select_tag :project_id, options_from_collection_for_select(available_projects, "id", "name", params[:project_id]), id: 'select2project', class: "js-select2 filter Issue-filter js-submit-form", multiple: true, 'data-placeholder'=> l('filter_by.project')  %>
+</span>

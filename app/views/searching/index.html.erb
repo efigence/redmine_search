@@ -1,21 +1,25 @@
-<h3><%= l(:label_search)%></h3>
-
 <div class="box">
-  <%= form_tag('/searching/esearch', :method => :get, :id => 'esearch-form', remote: true) do %>
+  <%= form_tag(esearch_path, :method => :get, :id => 'esearch-form', remote: true) do %>
     <p id="search-content">
       <%= text_field_tag 'esearch', params[:esearch], size: 60 %>
-      <%= hidden_field_tag 'klass', "Issue" %>
-      <%= hidden_field_tag 'period', '' %>
-      <%= hidden_field_tag 'from', '' %>
-      <%= hidden_field_tag 'to', '' %>
+      <%= select_tag 'esearch_mode',
+        options_for_select([ [t('label_search_mode_fuzzy'), "analyzed"], [t('label_search_mode_phrase'), "phrase"] ], params[:esearch_mode] || 'analyzed'),
+        class: 'js-submit-form js-select2-no-search'  %>
+
       <%= submit_tag l(:label_search), id: 'searching-btn' %>
       <%= link_to l(:label_cleanup), searching_cleanup_path %>
       <br/>
     </p>
+
+    <div class="filters-wrpper" style="display: none;">
+      <%= render partial: "searching/filters/base_filters" %>
+      <%= render partial: "searching/filters/common_start_filters" %>
+      <%= render partial: "searching/filters/issue_filters" %>
+      <%= render partial: "searching/filters/project_filters" %>
+      <%= render partial: "searching/filters/wikipage_filters" %>
+      <%= render partial: "searching/filters/common_filters" %>
+    </div>
   <% end %>
-  <div class='filters'>
-    <%= render partial: "tabs" %>
-  </div>
 </div>
 
 <table class="list issues">
@@ -23,13 +27,13 @@
     <% if @results %>
       <%= render partial: 'esearch' %>
     <% end %>
-    <!-- render -->
   </tbody>
 </table>
 
 <% content_for :header_tags do %>
-  <%= stylesheet_link_tag 'redminesearch.css', :plugin => 'redmine_search', :media => 'all' %>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <%= stylesheet_link_tag 'select2.min.css',   :plugin => 'redmine_search', :media => 'all' %>
+  <%= stylesheet_link_tag 'redminesearch.css', :plugin => 'redmine_search', :media => 'all' %>
   <%= javascript_include_tag 'redminesearch',  :plugin => 'redmine_search' %>
   <%= javascript_include_tag 'select2.min.js', :plugin => 'redmine_search' %>
 <% end %>

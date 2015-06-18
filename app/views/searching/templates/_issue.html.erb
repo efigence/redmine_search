@@ -1,7 +1,21 @@
-<%= @results[:esearch] %>
 <tr id="issue-<%= issue.id %>">
   <td class="id"><%= issue.id %></td>
-  <td class="subject"><%= link_to issue.subject, issue_path(issue.id) %></td>
+  <td class="subject">
+    <% if User.current.allowed_to?(:log_time, nil, global: true) %>
+      <span class="report-time">
+        <% if User.current.allowed_to?(:log_time, issue.project) %>
+          <a href="<%= new_time_entry_path(issue_id: issue.id) %>" target="blank" title="<%= t('field_time_entries') %>">
+            <i class="fa fa-clock-o fa-lg"></i>
+          </a>
+        <% else %>
+          <a href="javascript:void(0)" target="blank" title="<%= t('field_time_entries_disabled') %>">
+            <i class="fa fa-clock-o fa-lg" style="color: #d7d7d7;"></i>
+          </a>
+        <% end %>
+      </span>
+    <% end %>
+    <%= link_to issue.subject, issue_path(issue.id) %>
+  </td>
   <td class="tracker"><%= issue.tracker %></td>
   <td class="priority"><%= issue.priority %></td>
   <td class="status"><%= issue.status %></td>
@@ -12,8 +26,8 @@
     <td class="assigned_to"></td>
   <% end %>
 </tr>
-<% unless issue.description.blank? %>
+<% if details[:highlight] %>
   <tr>
-    <td class="description" colspan="7"><%= issue.description.truncate(200) %></td>
+    <td class="description" colspan="7"><%= details[:highlight].values.join(' &hellip; ').html_safe %></td>
   </tr>
 <% end %>

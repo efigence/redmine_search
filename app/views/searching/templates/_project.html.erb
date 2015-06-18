@@ -1,10 +1,9 @@
-<%= @results[:esearch] %>
 <tr id="project-<%= project.id %>">
   <td class="id"><%= project.id %></td>
-  <td class="subject"><%= link_to project.name, project_path(project.id) %></td>
+  <td class="subject"><%= link_to_project(project) %></td>
 </tr>
-<% unless project.description.blank? %>
+<% if details[:highlight] %>
   <tr>
-    <td class="description" colspan="2"><%= project.description.truncate(60) %></td>
+    <td class="description" colspan="7"><%= details[:highlight].values.join(' &hellip; ').html_safe %></td>
   </tr>
 <% end %>

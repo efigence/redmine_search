@@ -1,25 +1,24 @@
 <% if params[:page].blank? || params[:page].to_i == 1 %>
-
-  <tr id="advanced-options">
-    <td colspan="7">
-      <%= render partial: "searching/filters/#{@results[:klass].downcase}_filter", locals: {query: @results[:esearch], klass: @results[:klass]} %>
-    </td>
-  </tr>
-
-  <tr id="total-wrapper">
-    <td colspan="7">
-      <div id="total_scores"><%= t(:label_total, total: @results[:total]) %></div>
-    </td>
-  </tr>
+  <thead>
+    <tr id="total-wrapper">
+      <td colspan="7">
+        <div id="total_scores"><%= t(:label_total, total: @results.total_entries) %></div>
+      </td>
+    </tr>
+  </thead>
 <% end %>
 
-<%= render partial: "searching/templates/#{@results[:klass].downcase}", collection: @results[:entries] %>
+<tbody class="tbody_entries" data-name="<%= t('search_page', page: params[:page] || 1)  %>">
+  <% @results.with_details.each do |entry, details| %>
+    <%= render partial: "searching/templates/#{@klass.downcase}", object: entry, locals: {details: details} %>
+  <% end %>
 
-<% if @results[:next_page] && (@results[:total_pages] >= @results[:next_page]) %>
-  <tr id="load-more-wrapper">
-    <td colspan="7">
-      <% params[:page] = @results[:next_page] %>
-      <%= link_to l(:load_more, to_load: @results[:load_more_count]), {controller: 'searching', action: 'esearch', klass: @results[:klass], esearch: @results[:esearch], params: params}, :id => "load-more", method: :get, remote: true %>
-    </td>
-  </tr>
-<% end %>
+  <% if @results.next_page && (@results.total_pages >= @results.next_page) %>
+    <tr id="load-more-wrapper">
+      <td colspan="7">
+        <% params[:page] = @results.next_page %>
+        <%= link_to l(:load_more, to_load: @load_more_count), {controller: 'searching', action: 'esearch', klass: @klass, params: params}, :id => "load-more", method: :get, remote: true %>
+      </td>
+    </tr>
+  <% end %>
+</tbody>

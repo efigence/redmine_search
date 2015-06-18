@@ -1,9 +1,23 @@
-<%= select_tag :period, options_for_select(periods, params[:period]), id: 'selectPeriod', class: 'selectsFields' %>
-<%= select_tag :order, options_for_select(order_options, params[:order]), id: 'selectOrder', class: 'selectsFields' %>
-<%= hidden_field_tag :from, params[:from], id: 'fieldDateFrom'  %>
-<%= hidden_field_tag :to, params[:to], id: 'fieldDateTo' %>
+<div class="klass-filters">
+  <nav class="segmented-button">
+    <%= radio_button_tag 'klass', 'Issue', params[:klass] == "Issue"  %>
+    <label for="klass_Issue" class="first"><%= l(:filter_issues) %></label>
 
-<div id="dialog-date">
-  <%= text_field_tag :from, params[:from], placeholder: l(:label_from), id: 'date-from'  %>
-  <%= text_field_tag :to, params[:to], placeholder: l(:label_to), id: 'date-to'  %>
+    <%= radio_button_tag 'klass', 'Project', params[:klass] == "Project"  %>
+    <label for="klass_Project"><%= l(:filter_projects) %></label>
+
+    <%= radio_button_tag 'klass', 'WikiPage', params[:klass] == "WikiPage"  %>
+    <label for="klass_WikiPage" class="last"><%= l(:filter_wiki) %></label>
+  </nav>
 </div>
+
+<span class="base-filters filters">
+  <%= select_tag :period, options_for_select(periods, params[:period]), class: 'js-select2-no-search' %>
+  <%= hidden_field_tag :from, params[:from], id: 'hidden-date-from' %>
+  <%= hidden_field_tag :to, params[:to], id: 'hidden-date-to' %>
+
+  <div id="dialog-date">
+    <%= text_field_tag :from, params[:from], placeholder: l(:label_from), id: 'date-from'  %>
+    <%= text_field_tag :to, params[:to], placeholder: l(:label_to), id: 'date-to'  %>
+  </div>
+</span>

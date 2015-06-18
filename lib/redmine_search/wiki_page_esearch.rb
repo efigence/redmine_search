@@ -1,33 +1,58 @@
 require_relative './date_condition'
+require_relative './helpers/search_helper'
+
 module RedmineSearch
   class WikiPageEsearch < DateCondition
 
     def search params, allowed_to
       @params = params
       set_condition
-      order_by = @params[:order].blank? ? 'desc' : @params[:order]
-      @results = WikiPage.elastic_search @params[:esearch],
-                          fields: @fields,
-                          where: @conditions,
-                          operator: "or",
-                          order: {created_on: order_by.to_sym},
-                          page: @params[:page], per_page: 10
+      @results = WikiPage.elastic_search( @params[:esearch],
+        fields: @fields,
+        where: @conditions,
+        highlight: {
+          fields: {
+            content_text: {},
+            'wiki_attachment.filename' => {},
+            'wiki_attachment.text' => {}
+          }
+        },
+        operator: "and",
+        order: { _score: 'desc'},
+        page: @params[:page], per_page: 10 ) do |payload|
+          if payload[:query] && payload[:query][:dis_max] && payload[:query][:dis_max][:queries]
+            if @params[:esearch_mode] && @params[:esearch_mode] != 'analyzed'
+              payload[:query][:dis_max][:queries].each do |query|
+                query[:match].each do |k,v|
+                  v[:type] = query_type
+                end
+              end
+              unless @params[:attachment].blank?
+                payload[:query][:dis_max][:queries] << attachment_nested_query('wiki')
+              end
+            end
+          end
+        end
     end
 
     private
 
+    include RedmineSearch::SearchHelper
+
     def set_condition
       @conditions = {}
-      @fields = ["content_text"]
-      set_available_projects       unless User.current.admin?
+      @fields = [ "content_text^1.5" ]
+      if !@params[:project_id].blank?
+        set_project_condition
+      else
+        set_available_projects       unless User.current.admin?
+      end
       set_date_condition           unless @params[:period].blank?
-      set_attachment_fields        unless @params[:attachment].blank?
     end
 
-    def set_attachment_fields
-      return @fields = ["attachment", "attachment_text"] if @params[:attachment] == "only"
-      @fields << "attachment"
-      @fields << "attachment_text"
+    def set_project_condition
+      @params[:project_id] = @params[:project_id].kind_of?(Array) ? @params[:project_id] : @params[:project_id].to_s.split(',')
+      @conditions[:project_id] = @params[:project_id]
     end
 
     def set_available_projects
