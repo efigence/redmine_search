@@ -15,10 +15,10 @@ class ActionController::TestCase
   fixtures *fx2
 
   if Gem::Version.new(Rails.version) >= Gem::Version.new('4.0')
-    ActiveRecord::Fixtures.create_fixtures(File.dirname(__FILE__) + '/fixtures/master/', fx2)
+    ActiveRecord::FixtureSet.create_fixtures(File.dirname(__FILE__) + '/fixtures/master/', fx2)
   else
-    ActiveRecord::Fixtures.create_fixtures(File.dirname(__FILE__) + '/fixtures/default/', fx2)
+    ActiveRecord::FixtureSet.create_fixtures(File.dirname(__FILE__) + '/fixtures/default/', fx2)
   end
 
-  ActiveRecord::Fixtures.create_fixtures(File.dirname(__FILE__) + '/fixtures/', fx)
+  ActiveRecord::FixtureSet.create_fixtures(File.dirname(__FILE__) + '/fixtures/', fx)
 end

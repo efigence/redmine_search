@@ -1,5 +1,5 @@
 require File.expand_path('../../test_helper', __FILE__)
-require 'pry'
+
 class SearchingControllerTest < ActionController::TestCase
 
   def setup
