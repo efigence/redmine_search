@@ -8,7 +8,18 @@ module RedmineSearch
           unloadable
 
           Searchkick.search_method_name = :elastic_search
-          searchkick language: RedmineSearch.elastic_search_language unless Project.respond_to?(:searchkick_index)
+          # searchkick language: RedmineSearch.elastic_search_language unless Project.respond_to?(:searchkick_index)
+
+          unless Project.respond_to?(:searchkick_index)
+            searchkick language: RedmineSearch.elastic_search_language,
+              # index_name: 'redmine_project',
+              callbacks: :async,
+              highlight: [:name, :description]
+          end
+
+          def search_data
+            attributes
+          end
         end
       end
     end

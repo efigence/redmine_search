@@ -5,32 +5,31 @@ class SearchingController < ApplicationController
   include RedmineSearch
 
   def index
+    params[:klass] ||= "Issue"
     session[:allowed_to_private] = allowed_to_private?
-    # if !session[:esearch].blank?
-    #   params.merge!(session[:esearch])
-    #   esearch
-    # end
+    if params[:esearch]
+      fetch
+    end
   end
 
   def esearch
-    @resutls = get_results
-    @results = {
-      next_page: @results.next_page,
-      total_pages: @results.total_pages,
-      entries: @results.entries,
-      klass: params[:klass].constantize.name,
-      total: @results.total_entries,
-      load_more_count: @results.total_entries - (@results.current_page * 10),
-      esearch: params[:esearch]
-    }
-    # session[:esearch] = params
+    params[:klass] ||= "Issue"
+    fetch
     render partial: 'esearch'
   end
 
   def cleanup
-    session[:esearch] = nil
     redirect_to :action => "index"
   end
+
+  private
+
+  def fetch
+    @resutls = get_results
+    @klass = params[:klass].constantize.name
+    @load_more_count = @results.total_entries - (@results.current_page * 10)
+  end
+
 
   def allowed_to_private?
     return true if User.current.admin?

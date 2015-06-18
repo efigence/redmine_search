@@ -5,17 +5,31 @@ module RedmineSearch
     def search params, allowed_to
       @params = params
       set_condition
-      order_by = @params[:order].blank? ? 'desc' : @params[:order]
-      @results = Project.elastic_search @params[:esearch],
-                        fields: ["name^1.5", "description"],
-                        where: @conditions,
-                        operator: "or",
-                        order: {created_on: order_by.to_sym},
-                        page: @params[:page], per_page: 10
+      @results = Project.elastic_search( @params[:esearch],
+        fields: fields,
+        highlight: true,
+        where: @conditions,
+        operator: "and",
+        order: { _score: 'desc'},
+        page: @params[:page], per_page: 10 ) do |payload|
+          if payload[:query] && payload[:query][:dis_max] && payload[:query][:dis_max][:queries]
+            if @params[:esearch_mode] && @params[:esearch_mode] != 'analyzed'
+              payload[:query][:dis_max][:queries].each do |query|
+                query[:match].each do |k,v|
+                  v[:type] = query_type
+                end
+              end
+            end
+          end
+        end
       @results
     end
 
     private
+
+    def fields
+      @fields = [ "name^1.5", "description" ]
+    end
 
     def set_condition
       @conditions = {}

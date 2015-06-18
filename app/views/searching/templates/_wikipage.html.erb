@@ -1,5 +1,9 @@
 <tr id="wikipage-<%= wikipage.id %>">
   <td class="id"><%= wikipage.id %></td>
-  <td class="subject"><%= link_to wikipage.title, project_wiki_index_path(wikipage.project.id) %></td>
-  <td class="text"><%= wikipage.text.truncate(60) %></td>
+  <td class="subject"><%= link_to wikipage.title, project_wiki_page_path(wikipage.title, project_id: wikipage.project) %></td>
 </tr>
+<% if details[:highlight] %>
+  <tr>
+    <td class="description" colspan="7"><%= details[:highlight].values.join(' &hellip; ').html_safe %></td>
+  </tr>
+<% end %>

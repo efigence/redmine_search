@@ -1,174 +1,214 @@
-var bindLoadMore = function(){
-  bindConditions();
-  $('#load-more').off("ajax:success").on("ajax:success", function(e, data, status, xhr){
-    var entries = $('.tbody_entries');
+(function($){
+  var search = {
+    init: function(){
+      this.form = $('#esearch-form');
+      this.hideFiltersOnStartUp();
+      this.bindSelec2();
+      this.bindKlassChange();
+      this.bindLoadMore();
+      this.bindSearchForm();
+      this.bindModalDate();
+      this.bindSelectPeriod();
+      this.bindDateRange();
+      this.formSubmit();
+    },
 
-    entries.find('#load-more-wrapper').remove();
-    entries.append(data);
-    bindLoadMore();
-  }).off("ajax:error").on("ajax:error", function(e, xhr, status, error){
-    $('#tbody_entries').html('Nie udało się.');
-  });
-}
+    bindSelec2: function(){
+      $(".js-select2").each(function(i){
+        try { $(this).select2("destroy"); } catch (e) { /* do not care */ }
+      });
+      $(".js-select2").select2({
+        language: "en"
+      });
 
-var bindFilterForm = function(){
-  $('#filter-form').change(function(){
-    if (event.target.value !== "dr") {
-      setTimeout(function(){
-        var el = $('.js-select2');
-        for (var i = el.length - 1; i >= 0; i--) {
-          $(el[i]).select2("close");
-        };
-        $('#filter-form').submit();
-      }, 100);
-    }
-  });
+      $(".js-select2-no-search").each(function(i){
+        try { $(this).select2("destroy"); } catch (e) { /* do not care */ }
+      });
+      $(".js-select2-no-search").select2({
+        language: "en",
+        minimumResultsForSearch: Infinity
+      });
+    },
 
-  $('#filter-form').on("ajax:success", function(e, data, status, xhr){
-    $('.tbody_entries').html(data);
-    bindLoadMore();
-    bindFilterForm();
-    bindModalDate();
-    setSearchPeriod();
-  }).on("ajax:error", function(e, xhr, status, error){
-    $('#tbody_entries').html('Nie udało się.');
-  });
-}
+    isBlank: function (val) {
+      return ( val === '' || val === undefined || val === null )
+    },
 
-var bindModalDate = function() {
-  $("#date-from").datepicker({ dateFormat: 'dd-mm-yy' });
-  $("#date-to").datepicker({ dateFormat: 'dd-mm-yy' });
-  form = $('#filter-form');
-  dialog = $( "#dialog-date" ).dialog({
-    autoOpen: false,
-    height: 200,
-    width: 204,
-    modal: true,
-    draggable: false,
-    resizable: false,
-    buttons: {
-      "OK": function() {
-        var from = $("#date-from").val(),
-            to = $("#date-to").val();
-        $('#fieldDateFrom').val(from);
-        $("#fieldDateTo").val(to);
-        form.submit();
-        dialog.dialog( "close" );
+    // disableFields: function(fields){
+    //   fields.attr("disabled", "disabled");
+    // },
+
+    // enableFields: function(fields){
+    //   fields.removeAttr("disabled");
+    // },
+
+    hideBaseFilters: function() {
+      $('.base-filters').hide()
+    },
+
+    showBaseFilters: function() {
+      $('.base-filters').show()
+    },
+
+    hideCommonFilters: function() {
+      $('.common-filters').hide()
+    },
+
+    showCommonFilters: function() {
+      $('.common-filters').css('display', 'inline-block')
+    },
+
+    hideSpecificFilters: function() {
+      $.each([ 'Issue', 'Project', 'WikiPage' ], function( index, value ) {
+        $('.'+value+'-filters').hide();
+      });
+    },
+
+    hideAllFilters: function() {
+        this.hideBaseFilters();
+        this.hideSpecificFilters();
+        this.hideCommonFilters();
+    },
+
+    bindKlassChange: function(){
+      var $this = this;
+      $('input[name=klass]', '.klass-filters').on('change', function(){
+        if( !$this.isBlank($('#esearch').val())){
+          $('.filters-wrpper').hide();
+          klass = $(this).val();
+          $this.showBaseFilters();
+          $this.hideSpecificFilters();
+          $('.'+klass+'-filters').css('display', 'inline');
+          if (klass === 'Issue' || klass == 'WikiPage'){
+            $this.showCommonFilters();
+          }
+          $('.filters-wrpper').show();
+          $this.bindSelec2();
+          $this.form.submit();
+        }
+      })
+    },
+
+
+    hideFiltersOnStartUp: function(){
+      this.hideSpecificFilters();
+      this.showBaseFilters();
+      klass = $('input[name=klass]:checked', '.klass-filters').val()
+      $('.'+klass+'-filters').css('display', 'inline');
+      if (klass === 'Issue' || klass == 'WikiPage'){
+        this.showCommonFilters();
       }
+      $('.filters-wrpper').show();
+    },
+
+    bindLoadMore: function(){
+      var $this = this;
+      $('#load-more').off("ajax:success").on("ajax:success", function(e, data, status, xhr){
+        var entries = $('.tbody_entries:last');
+
+        entries.find('#load-more-wrapper').remove();
+        data = $(data);
+        entries.after(data);
+        $this.scrollTo(data);
+        $this.bindLoadMore();
+      }).off("ajax:error").on("ajax:error", function(e, xhr, status, error){
+        $('#tbody_entries').html('Nie udało się.');
+      });
+    },
+
+    bindSearchForm: function(){
+      var $this = this;
+      this.form.on("ajax:success", function(e, data, status, xhr){
+        $(".list.issues thead").remove();
+        $(".tbody_entries:not(:first)").remove();
+        var el = $('.tbody_entries:first').replaceWith(data)
+        $this.bindLoadMore();
+        $this.hideFiltersOnStartUp();
+      }).on("ajax:error", function(e, xhr, status, error){
+        $('#tbody_entries').html('Nie udało się.');
+      });
+    },
+
+    bindModalDate: function() {
+      var $this = this;
+      $("#date-from").datepicker({ dateFormat: 'dd-mm-yy' });
+      $("#date-to").datepicker({ dateFormat: 'dd-mm-yy' });
+      form = $('#filter-form');
+      this.dialog = $( "#dialog-date" ).dialog({
+        autoOpen: false,
+        height: 200,
+        width: 204,
+        modal: true,
+        draggable: false,
+        resizable: false,
+        buttons: {
+          "OK": function() {
+            var period = $("#period"),
+              from = $('#date-from').val(),
+              to = $('#date-to').val();
+
+            if ($this.isBlank(from) && $this.isBlank(to)){
+              return false;
+            }
+
+            if ($this.isBlank(from)){
+              from = '&infin;'
+            }
+            if ($this.isBlank(to)){
+              to = '&infin;'
+            }
+
+            period.find('option:last').empty().append(from + ' &mdash; ' + to);
+            period.select2("destroy");
+            period.select2({
+              language: "en",
+              minimumResultsForSearch: Infinity
+            });
+            $this.bindSelectPeriod()
+            $this.form.submit();
+            $this.dialog.dialog( "close" );
+          }
+        }
+      });
+    },
+
+    bindSelectPeriod: function(){
+      var $this = this;
+      $("#period").off("select2:closing").on("select2:closing", function(e) {
+        var val = $(this).val();
+        if (val === "dr") {
+          $this.dialog.dialog( "open" );
+        } else {
+          $this.form.submit();
+        }
+      });
+    },
+
+    bindDateRange: function(){
+      $('#date-from').on('change', function(){
+        $('#hidden-date-from').val($(this).val())
+      })
+      $('#date-to').on('change', function(){
+        $('#hidden-date-to').val($(this).val())
+      })
+    },
+
+    formSubmit: function(){
+      var $this = this;
+      $('.js-submit-form').on('change', function(){
+        $this.form.submit();
+      });
+    },
+
+    scrollTo: function(element){
+      return $('html, body').animate({
+        scrollTop: element.offset().top - 100
+      }, 1000);
     }
-  });
-}
-var setSearchPeriod = function() {
-  // set main search input filters
-  var period = $('#selectPeriod').val(),
-      from = $('#fieldDateFrom').val(),
-      to = $("#fieldDateTo").val();
-  $('#period').val(period);
-  if (period === "dr") {
-    $('#from').val(from);
-    $('#to').val(to);
+
   }
-}
 
-var setCurrentPeriod = function(el) {
-  // set href to tabs with period
-  var period = $('#selectPeriod').val()
-  el.href = el.href + '&period=' + period;
-  if (period === "dr") {
-    el.href = el.href + '&from=' + $('#fieldDateFrom').val();
-    el.href = el.href + '&to=' + $('#fieldDateTo').val();
-  }
-}
-var bindTabs = function() {
-  $('#project-filter').click(function(){
-    $('.ui-dialog').remove();
-    $('#klass').val('Project');
-    setClassActive(this);
-    setSearchPeriod();
-    setCurrentPeriod(this);
-   });
-
-  $('#issue-filter').click(function(){
-    $('.ui-dialog').remove();
-    $('#klass').val('Issue');
-    setClassActive(this);
-    setSearchPeriod();
-    setCurrentPeriod(this);
+  $(function(){
+    search.init();
   });
-
-  $('#wiki-filter').click(function(){
-    $('.ui-dialog').remove();
-    $('#klass').val('WikiPage');
-    setClassActive(this);
-    setSearchPeriod();
-    setCurrentPeriod(this);
-  });
-}
-
-var setClassActive = function(el){
-  $('.filter-btn').removeClass('active');
-  $(el).addClass('active');
-}
-
-var bindConditions = function(){
-  bindModalDate();
-  $("#select2project").select2({
-    language: "en"
-  });
-
-  $("#selectPeriod").click(function() {
-    if (event.target.value === "dr") {
-      element = event.target
-      dialog.dialog( "open" );
-    }
-  });
-  $("#select2users").select2({
-    language: "en"
-  });
-  $("#select2tracker").select2({
-    language: "en"
-  });
-  $("#select2priority").select2({
-    language: "en"
-  });
-  $("#select2status").select2({
-    language: "en"
-  });
-  $("#select2roles").select2({
-    language: "en"
-  });
-}
-
-$(function(){
-  $('.filters').hide();
-  bindLoadMore();
-  bindTabs();
-  bindFilterForm();
-  $('#esearch-form').on("ajax:success", function(e, data, status, xhr){
-    $('.filters').show();
-    var filter = $('.filters').children();
-    var i, _len;
-    var val = $('#esearch').val();
-
-    for (i = 0, _len = filter.length; i < _len; i++) {
-      filter[i].href = filter[i].href + "&esearch=" + val
-    };
-
-    $('.tbody_entries').html(data);
-    bindLoadMore();
-    bindFilterForm();
-  }).on("ajax:error", function(e, xhr, status, error){
-    $('#tbody_entries').html('Nie udało się.');
-
-  });
-
-  $('.filters').on("ajax:success", function(e, data, status, xhr){
-    $('.tbody_entries').html(data);
-    bindLoadMore();
-    bindFilterForm();
-  }).on("ajax:error", function(e, xhr, status, error){
-    $('#tbody_entries').html('Nie udało się.');
-  });
-
-
-});
+})(jQuery)
