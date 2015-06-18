@@ -16,16 +16,16 @@ rvm:
 env:
   - REDMINE_VERSION=2.4.7 VERBOSE=no DB=mysql
   - REDMINE_VERSION=2.5.3 VERBOSE=no DB=mysql
-  - REDMINE_VERSION=2.6.2 VERBOSE=no DB=mysql
-  - REDMINE_VERSION=3.0.0 VERBOSE=no DB=mysql
+  - REDMINE_VERSION=2.6.5 VERBOSE=no DB=mysql
+  - REDMINE_VERSION=3.0.3 VERBOSE=no DB=mysql
   - REDMINE_VERSION=2.4.7 VERBOSE=no DB=postgres
   - REDMINE_VERSION=2.5.3 VERBOSE=no DB=postgres
-  - REDMINE_VERSION=2.6.2 VERBOSE=no DB=postgres
-  - REDMINE_VERSION=3.0.0 VERBOSE=no DB=postgres
+  - REDMINE_VERSION=2.6.5 VERBOSE=no DB=postgres
+  - REDMINE_VERSION=3.0.3 VERBOSE=no DB=postgres
   - REDMINE_VERSION=2.4.7 VERBOSE=no DB=sqlite
   - REDMINE_VERSION=2.5.3 VERBOSE=no DB=sqlite
-  - REDMINE_VERSION=2.6.2 VERBOSE=no DB=sqlite
-  - REDMINE_VERSION=3.0.0 VERBOSE=no DB=sqlite
+  - REDMINE_VERSION=2.6.5 VERBOSE=no DB=sqlite
+  - REDMINE_VERSION=3.0.3 VERBOSE=no DB=sqlite
 script:
   - export PLUGIN=redmine_search
   - export WORKSPACE=$(pwd)/workspace
