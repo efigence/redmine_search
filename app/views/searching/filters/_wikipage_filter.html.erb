@@ -1,7 +1,0 @@
-<%= form_tag('/searching/esearch', :method => :get, :id => 'filter-form', remote: true) do %>
-  <%= hidden_field_tag :condition, true %>
-  <%= hidden_field_tag :esearch, query %>
-  <%= hidden_field_tag :klass, klass %>
-  <%= render partial: 'searching/filters/base_filters' %>
-  <%= select_tag :attachment, options_for_select(attachment_options, params[:attachment]), id: 'selectAttachment', class: 'selectsFields' %>
-<% end %>
