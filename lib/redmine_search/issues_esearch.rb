@@ -4,7 +4,7 @@ require_relative './helpers/search_helper'
 module RedmineSearch
   class IssuesEsearch < DateCondition
 
-      def search params, allowed_to
+    def search params, allowed_to
       @allowed_to = allowed_to
       @params = params
       set_condition
@@ -46,7 +46,7 @@ module RedmineSearch
 
     include RedmineSearch::SearchHelper
 
-        def set_condition
+    def set_condition
       @conditions = {}
       @fields = [ "subject^1.5", "description" ]
       set_issues_condition         unless User.current.admin?

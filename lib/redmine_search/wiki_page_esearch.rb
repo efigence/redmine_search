@@ -45,9 +45,9 @@ module RedmineSearch
       if !@params[:project_id].blank?
         set_project_condition
       else
-        set_available_projects       unless User.current.admin?
+        set_available_projects  unless User.current.admin?
       end
-      set_date_condition           unless @params[:period].blank?
+      set_date_condition  unless @params[:period].blank?
     end
 
     def set_project_condition
