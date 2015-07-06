@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/efigence/redmine_search.svg?branch=master)](https://travis-ci.org/efigence/redmine_search)
-# Redmine Search with Searchkick
+
+# Redmine Search with Searchkick [![Build Status](https://travis-ci.org/efigence/redmine_search.svg?branch=master)](https://travis-ci.org/efigence/redmine_search)
 
 This plugin allows users to search information in Project, Issues, WikiPages by fuzzy or phrase method.
 There is available many filters for each tabs. Moreover this plugin overrides redmine core search.
