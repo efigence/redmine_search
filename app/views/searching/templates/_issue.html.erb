@@ -14,6 +14,9 @@
         <% end %>
       </span>
     <% end %>
+    <span class='hook-actions'>
+      <%= call_hook(:redmine_search_issue_actions, :issue => issue) %>
+    </span>
     <%= link_to issue.subject, issue_path(issue.id) %>
   </td>
   <td class="tracker"><%= issue.tracker %></td>

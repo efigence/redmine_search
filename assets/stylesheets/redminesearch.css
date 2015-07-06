@@ -330,3 +330,8 @@
 .list.issues .subject .report-time{
   float: right;
 }
+
+.list.issues .subject .hook-actions{
+  margin-right: 10px;
+  float: right;
+}
